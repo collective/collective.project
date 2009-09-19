@@ -1,0 +1,74 @@
+<html>
+
+<body metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="top_slot"
+             tal:define="dummy python:request.set('disable_border',1)" />
+
+<head>
+    <metal:css fill-slot="css_slot">
+        <style type="text/css" media="all"
+                tal:content="string: @import url(${context/++resource++project.css});"></style>
+    </metal:css>
+</head>
+
+<div metal:fill-slot="main" 
+    tal:define="projects python: view.getProjects('sort-on-projects')">
+
+    <h1 tal:content="view/getIterTitle" />
+
+    <table tal:define="global c python: 0"> 
+        <thead>
+            <tr>
+                <th class="bold">Project</th>
+                <th class="bold">Rate</th>
+                <th class="bold">Hours</th>
+                <th class="bold">Start</th>
+                <th class="bold">Stop</th>
+                <th class="bold">Total</th>
+            </tr>
+        </thead>
+
+    <tal:projects tal:repeat="project projects">
+        <tr tal:attributes="class python: view.getOddEven(c)" 
+            tal:define="project_data python: view.project_totals(project);
+                        global c python: c + 1">
+
+            <td> 
+                <span tal:content="structure 
+                    python: view.breadcrumbs(project,'sort-on-projects','with-title')"></span></td>
+
+            <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
+                tal:attributes="href python: view.project_edit(project)"><span class="project-breadcrumbs"
+                    tal:content="python: project_data[2]"></span></a></span></td>
+
+            <td class="align-right"><span tal:content="python: project_data[1]" /></td>
+
+            <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
+                tal:attributes="href python: view.project_edit(project)"><span class="project-breadcrumbs"
+                    tal:content="python: project_data[3]"></span></a></span></td>
+
+            <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
+                tal:attributes="href python: view.project_edit(project)"><span class="project-breadcrumbs"
+                    tal:content="python: project_data[4]"></span></a></span></td>
+
+
+            <td class="align-right"><span tal:content="python: project_data[5]" /></td>
+        </tr>
+    </tal:projects>
+
+    </table>
+
+    <div class="float-right align-right">
+        Total: <span tal:content="python: view.projects_total(projects)" />
+        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
+            href="folder_contents">Manage contents</a></span></div>
+        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
+            href="selectViewTemplate?templateId=clients_view">Toggle sort</a></span></div>
+    </div>
+
+    <div tal:replace="structure provider:plone.belowcontentbody" />
+
+</div>
+</body>
+</html>

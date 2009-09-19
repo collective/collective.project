@@ -1,0 +1,51 @@
+
+table { 
+    width: 100%
+}
+
+td .bold {
+    font-weight: bold;
+}
+
+a:hover { 
+    text-decoration: none !important;
+    border: 0px;
+}
+
+.project-breadcrumbs { 
+    padding-left: 8px;
+}
+
+.navTreeItem a { 
+    border: 0px;
+}
+
+.navTreeItem a:hover { 
+    border: 0px;
+}
+
+.float-right {
+    float: right;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.addtask {
+    float: right;
+    border: 1px solid #8cacbb;
+    background: transparent url(linkTransparent.gif) no-repeat;
+    background-position: 4px 13px;
+}
+
+.addtask a {
+    text-decoration: none;
+    display: block;
+    padding: 1em;
+}
+
+.addtask a:hover {
+    background: #dee7ec url(linkTransparent.gif) no-repeat;
+    background-position: 4px 13px;
+}

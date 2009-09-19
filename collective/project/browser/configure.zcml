@@ -1,0 +1,62 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="Products.project">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="projects_view"
+      class=".projects_view.ProjectsView"
+      template="projects_view.pt"
+      permission="zope2.View"
+  />
+
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="print_view"
+      class=".projects_view.ProjectsView"
+      template="print_view.pt"
+      permission="zope2.View"
+  />
+
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="clients_view"
+      class=".projects_view.ProjectsView"
+      template="clients_view.pt"
+      permission="zope2.View"
+  />
+
+  <browser:page
+      for="Products.ATContentTypes.interface.IATFolder"
+      name="projects_view"
+      class=".projects_view.ProjectsView"
+      template="projects_view.pt"
+      permission="zope2.View"
+  />
+
+  <browser:page
+      for="Products.ATContentTypes.interface.IATFolder"
+      name="clients_view"
+      class=".projects_view.ProjectsView"
+      template="clients_view.pt"
+      permission="zope2.View"
+  />
+
+  <browser:page
+      for="plone.dexterity.content.Container"
+      name="project_view"
+      class=".project_view.ProjectView"
+      permission="zope2.View"
+  />
+
+  <browser:resource
+      name="project.css"
+      file="project.css"
+  />
+
+</configure>
