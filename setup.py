@@ -5,7 +5,7 @@ version = '0.6'
 
 setup(name='collective.project',
       version=version,
-      description="Formerly Products.project, this package aims for "simple" project management with 3 new (Dexterity) content types added to Plone: Project, Iteration, and Task.",
+      description="""Formerly Products.project, this package aims for "simple" project management with 3 new (Dexterity) content types added to Plone: Project, Iteration, and Task.""",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
