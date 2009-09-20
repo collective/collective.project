@@ -1,7 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="Products.project">
+    i18n_domain="collective.project">
 
   <include package="plone.app.contentmenu" />
 

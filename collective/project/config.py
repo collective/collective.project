@@ -1,11 +1,11 @@
 """Common configuration constants
 """
 
-PROJECTNAME = 'Products.project'
+PROJECTNAME = 'collective.project'
 
 ADD_PERMISSIONS = {
     # -*- extra stuff goes here -*-
-    'Iteration': 'Products.project: Add Iteration',
-    'Task': 'Products.project: Add Task',
-    'Project': 'Products.project: Add Project',
+    'Iteration': 'collective.project: Add Iteration',
+    'Task': 'collective.project: Add Task',
+    'Project': 'collective.project: Add Project',
 }
