@@ -17,6 +17,10 @@
 
     <h1 tal:content="view/getIterTitle" />
 
+    <div class="addtask visualNoPrint">
+        <a tal:attributes="href string:++add++project">Add Project</a>
+    </div>
+
     <table tal:define="global c python: 0" class="listing" id="projects">
         <thead>
             <tr>
