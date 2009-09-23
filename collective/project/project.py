@@ -14,15 +14,39 @@ view class is called "View". We specify that it is a view for any IPage
 """
 
 from five import grok
+from zope import schema
 from plone.directives import form
+from collective.project import projectMessageFactory as _
+import datetime
 
 class IProject(form.Schema):
-    form.model("models/project.xml")
+#    form.model("models/project.xml")
     
     # It is possible to add additional fields and methods can be added here
     # if necessary. However, without a custom class, we usually can't
     # promise new methods.
 
+    start = schema.Datetime(
+            title=_(u"Start date"),
+            required=False,
+        )
+
+    stop = schema.Datetime(
+            title=_(u"End date"),
+            required=False,
+        )
+
 class View(grok.View):
     grok.context(IProject)
     grok.require('zope2.View')
+
+
+@form.default_value(field=IProject['start'])
+def startDefaultValue(data):
+    return datetime.datetime.today() + datetime.timedelta(7)
+
+
+@form.default_value(field=IProject['stop'])
+def stopDefaultValue(data):
+    return datetime.datetime.today() + datetime.timedelta(10)
+
