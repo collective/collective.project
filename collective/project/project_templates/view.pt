@@ -16,7 +16,7 @@
     <h1 tal:content="structure python: view.getIterTitle(view.context)">Client → Project</h1>
 
     <div class="addtask visualNoPrint"> 
-        <a tal:attributes="href string:++add++task">Add Task</a>
+        <a tal:attributes="href string:++add++iteration">Add Iteration</a>
     </div>
 
     <table tal:define="global c python: 0" class="listing" id="project">

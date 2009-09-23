@@ -47,13 +47,6 @@
       permission="zope2.View"
   />
 
-  <browser:page
-      for="plone.dexterity.content.Container"
-      name="project_view"
-      class=".project_view.ProjectView"
-      permission="zope2.View"
-  />
-
   <browser:resource
       name="project.css"
       file="project.css"
