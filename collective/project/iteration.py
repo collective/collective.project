@@ -36,6 +36,12 @@ class IIteration(form.Schema):
             required=False,
         )
 
+    hours = schema.Float(
+            title=_(u"Hours"),
+            required=False,
+            default=0.0,
+        )
+
 class View(grok.View):
     grok.context(IIteration)
     grok.require('zope2.View')
