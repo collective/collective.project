@@ -10,8 +10,9 @@ class IIteration(form.Schema):
             title=_(u"Title"),
         )
 
-    description = schema.Text(
-            title=_(u"Description"),
+    summary = schema.Text(
+            title=_(u"Summary"),
+            description=_(u"A short summary of the content."),
             required=False,
         )
 
