@@ -44,11 +44,13 @@ class IProject(form.Schema):
     flat = schema.Bool(
             title=_(u"Flat"),
             required=False,
+            default=False,
         )
 
     billable = schema.Bool(
             title=_(u"Billable"),
             required=False,
+            default=True,
         )
 
 class View(grok.View):

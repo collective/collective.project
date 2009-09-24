@@ -36,9 +36,9 @@ class ITask(form.Schema):
             required=False,
         )
 
-class View(grok.View):
-    grok.context(ITask)
-    grok.require('zope2.View')
+#class View(grok.View):
+#    grok.context(ITask)
+#    grok.require('zope2.View')
 
 @form.default_value(field=ITask['start'])
 def startDate(data):
