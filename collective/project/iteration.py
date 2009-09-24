@@ -19,7 +19,7 @@ from plone.directives import form
 from collective.project import projectMessageFactory as _
 import datetime
 
-class IProject(form.Schema):
+class IIteration(form.Schema):
 #    form.model("models/project.xml")
     
     # It is possible to add additional fields and methods can be added here
@@ -36,24 +36,25 @@ class IProject(form.Schema):
             required=False,
         )
 
-    rate = schema.Float(
-            title=_(u"Rate"),
-            required=False,
-        )
-
-    flat = schema.Bool(
-            title=_(u"Flat"),
-            required=False,
-        )
-
-    billable = schema.Bool(
-            title=_(u"Billable"),
-            required=False,
-        )
-
 class View(grok.View):
-    grok.context(IProject)
+    grok.context(IIteration)
     grok.require('zope2.View')
+
+    def getIterTitle(self,project):
+        client_breadcrumbs = self.client_breadcrumbs(project)
+        try:
+            return self.context.portal_properties.project_properties.iteration + ' &rarr; ' + client_breadcrumbs
+        except:
+            return 'Active Projects &rarr; ' + client_breadcrumbs
+
+    def client_breadcrumbs(self,project):
+        results = []
+        path = list(project.getPhysicalPath())[2:]
+        for i in range(len(path)):
+            results.append(self.context.restrictedTraverse('/'.join(path)).Title())
+            path.pop()
+        results.reverse()
+        return ' &rarr; '.join(results)
 
     def total_hours(self):
         try:
@@ -65,6 +66,22 @@ class View(grok.View):
             hours = 0.0
 
         return self.format_float(hours)
+
+    def format_float(self,f):
+        try:
+            f = '%.2f' % f
+            return f
+        except:
+            return None
+
+    def getRate(self):
+        return self.format_float(self.context.aq_inner.rate)
+
+    def total_income(self):
+        try:
+            return self.format_float(self.calculate_billable() * self.context.aq_inner.rate)
+        except:
+            return self.format_float(self.calculate_billable() * 0.0)
 
     def calculate_billable(self):
         try:
@@ -78,34 +95,17 @@ class View(grok.View):
 
         return hours
 
-    def total_billable(self):
-        return self.format_float(self.calculate_billable())
+    def getOddEven(self,counter):
+        if counter % 2 == 0:
+            return 'even'
+        else:
+            return 'odd'
 
-    def total_income(self):
-        try:
-            return self.format_float(self.calculate_billable() * self.context.aq_inner.rate)
-        except:
-            return self.format_float(self.calculate_billable() * 0.0)
+    def getStartDate(self,task):
+        return self.format_date(task.start)
 
-    def project_title(self):
-        project = self.context.aq_inner.Title()
-        return '%s' % (project)
-
-    def client_breadcrumbs(self,project):
-        results = []
-        path = list(project.getPhysicalPath())[2:]
-        for i in range(len(path)):
-            results.append(self.context.restrictedTraverse('/'.join(path)).Title())
-            path.pop()
-        results.reverse()
-        return ' &rarr; '.join(results)
-
-    def format_float(self,f):
-        try:
-            f = '%.2f' % f
-            return f
-        except:
-            return None
+    def getStopDate(self,task):
+        return self.format_date(task.stop)
 
     def format_date(self,d):
         try:
@@ -114,36 +114,14 @@ class View(grok.View):
         except:
             return None
 
-    def getStartDate(self,task):
-        return self.format_date(task.start)
-
-    def getStopDate(self,task):
-        return self.format_date(task.stop)
-
     def getHours(self,task):
 #        return self.format_float(task.hours)
         return 'Calculate me.'
 
-    def getRate(self):
-        return self.format_float(self.context.aq_inner.rate)
-
-    def getOddEven(self,counter):
-        if counter % 2 == 0:
-            return 'even'
-        else:
-            return 'odd'
-
-    def getIterTitle(self,project):
-        client_breadcrumbs = self.client_breadcrumbs(project)
-        try:
-            return self.context.portal_properties.project_properties.iteration + ' &rarr; ' + client_breadcrumbs
-        except:
-            return 'Active Projects &rarr; ' + client_breadcrumbs
-
-@form.default_value(field=IProject['start'])
+@form.default_value(field=IIteration['start'])
 def startDate(data):
     return datetime.datetime.today()
 
-@form.default_value(field=IProject['stop'])
+@form.default_value(field=IIteration['stop'])
 def stopDate(data):
-    return datetime.datetime.today() + datetime.timedelta(365)
+    return datetime.datetime.today() + datetime.timedelta(30)

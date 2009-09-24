@@ -21,24 +21,8 @@
   <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
   <element value="plone.app.content.interfaces.INameFromTitle"/>
  </property>
- <property name="schema"></property>
- <property
-    name="model_source">&lt;model xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
-    &lt;schema&gt;
-      &lt;field name="date" type="zope.schema.Datetime"&gt;
-        &lt;title&gt;Start&lt;/title&gt;
-        &lt;required&gt;False&lt;/required&gt;
-      &lt;/field&gt;
-      &lt;field name="stop" type="zope.schema.Datetime"&gt;
-        &lt;title&gt;Stop&lt;/title&gt;
-        &lt;required&gt;False&lt;/required&gt;
-      &lt;/field&gt;
-      &lt;field name="hours" type="zope.schema.Float"&gt;
-        &lt;title&gt;Hours&lt;/title&gt;
-        &lt;required&gt;False&lt;/required&gt;
-      &lt;/field&gt;
-    &lt;/schema&gt;
-  &lt;/model&gt;</property>
+ <property name="schema">collective.project.task.ITask</property>
+ <property name="model_source"></property>
  <property name="model_file"></property>
  <alias from="(Default)" to="(selected layout)"/>
  <alias from="edit" to="@@edit"/>
