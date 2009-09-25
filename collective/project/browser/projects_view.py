@@ -26,6 +26,7 @@ class ProjectsView(BrowserView):
         return self.sortedDictValues3(results)
 
     def project_totals(self,project):
+        iter = None
         obj = project.getObject()
         name,hours,rate,start,stop,iters = (obj.Title(), 0.0, obj.rate, obj.start, 
             obj.stop, obj.objectValues())
@@ -34,35 +35,33 @@ class ProjectsView(BrowserView):
             hours = datetime.timedelta(0)
             for task in tasks:
                 hours += task.stop - task.start
-
-        if not obj.flat and rate is not None:
-            days = self.total_hours_billable(iter).days
-            seconds = days * 86400
-            hours = float((self.total_hours_billable(iter).seconds + seconds)/3600)
-            name,hours,rate,start,stop,total = name,hours,rate,start,stop,hours * rate
-        else:
-            # amortize
-            if start is not None and stop is not None and rate is not None:
-                diff=stop-start
-                months = diff.days/30
-                amort = rate/months
-                name,hours,rate,start,stop,total = name,hours,rate,start,stop,amort
+        if iter is not None:
+            if not obj.flat and rate is not None:
+                days = self.total_hours_billable(iter).days
+                seconds = days * 86400
+                hours = float((self.total_hours_billable(iter).seconds + seconds)/3600)
+                name,hours,rate,start,stop,total = name,hours,rate,start,stop,hours * rate
             else:
-                name,hours,rate,start,stop,total = name,hours,rate,start,stop,rate
+                # amortize
+                if start is not None and stop is not None and rate is not None:
+                    diff=stop-start
+                    months = diff.days/30
+                    amort = rate/months
+                    name,hours,rate,start,stop,total = name,hours,rate,start,stop,amort
+                else:
+                    name,hours,rate,start,stop,total = name,hours,rate,start,stop,rate
 
-        if not obj.billable:
-            total = 0.0
-            name,hours,rate,start,stop,total = name,hours,rate,start,stop,total
+            if not obj.billable:
+                total = 0.0
+                name,hours,rate,start,stop,total = name,hours,rate,start,stop,total
 
-        total,hours,rate=(self.format_float(total),
-                          self.format_float(hours),
-                          self.format_float(rate))
-        start,stop=self.format_date(start),self.format_date(stop)  
-
-        return ([name,hours,rate,start,stop,total])
-
-#        return (0,0,0,0,0,0)
-
+            total,hours,rate=(self.format_float(total),
+                              self.format_float(hours),
+                              self.format_float(rate))
+            start,stop=self.format_date(start),self.format_date(stop)  
+            return ([name,hours,rate,start,stop,total])
+        else:
+            return (0,0,0,0,0,0)
 
     def format_float(self,f):
         try:
