@@ -59,7 +59,9 @@
             </div>
             <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
                 href="folder_contents">Manage contents</a></span></div>
-            </div>
+            <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
+                href="edit">Edit this</a></span></div>
+        </div>
         <div tal:replace="structure provider:plone.belowcontentbody" />
     </tal:iters>
 
