@@ -1,6 +1,7 @@
 
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+import datetime
 
 class ProjectsView(BrowserView):
 
@@ -29,9 +30,15 @@ class ProjectsView(BrowserView):
         name,hours,rate,start,stop,iters = (obj.Title(), 0.0, obj.rate, obj.start, 
             obj.stop, obj.objectValues())
         for iter in iters:
-            if iter.hours is not None:
-                hours += iter.hours
+            tasks = iter.objectValues()
+            hours = datetime.timedelta(0)
+            for task in tasks:
+                hours += task.stop - task.start
+
         if not obj.flat and rate is not None:
+            days = self.total_hours_billable(iter).days
+            seconds = days * 86400
+            hours = float((self.total_hours_billable(iter).seconds + seconds)/3600)
             name,hours,rate,start,stop,total = name,hours,rate,start,stop,hours * rate
         else:
             # amortize
@@ -109,3 +116,12 @@ class ProjectsView(BrowserView):
             return self.context.portal_properties.project_properties.iteration
         except:
             return 'Active Projects'
+
+    def total_hours_billable(self,iter):
+        hours = datetime.timedelta(0)
+        tasks = iter.objectValues()
+        for task in tasks:
+            if task.billable:
+                hours += task.stop - task.start
+        return hours
+

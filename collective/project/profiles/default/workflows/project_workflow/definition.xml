@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="project_workflow"
+             title="Project Workflow" description=""
+             state_variable="review_state"
+             initial_state="active">
+ <permission>Access contents information</permission>
+ <permission>Modify portal content</permission>
+ <permission>List folder contents</permission>
+ <permission>View</permission>
+ <state state_id="active" title="Active">
+  <exit-transition transition_id="deactivate"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="List folder contents"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="inactive" title="Inactive">
+  <exit-transition transition_id="activate"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="List folder contents"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="activate" title="Activate"
+             new_state="active" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/content_status_modify?workflow_action=activate"
+          category="workflow">Activate</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="deactivate" title="Deactivate"
+             new_state="inactive" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/content_status_modify?workflow_action=deactivate"
+          category="workflow">Deactivate</action>
+  <guard>
+  </guard>
+ </transition>
+</dc-workflow>
