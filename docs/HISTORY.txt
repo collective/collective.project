@@ -1,35 +1,53 @@
 Changelog
 =========
 
-0.6 - Release
-----------------
+0.6 - Sep 25, 2009
+------------------
 
-* Rename to collective.project
-* Finish Dexterity content types implementation
+* Rename package to 'collective.project'.
+* Final Dexterity content types implementation:
+    - Client
+        - Provides container for Project, and nothing else.
+    - Project
+        - Has start(datetime), stop(datetime), rate(float), flat(boolean), billable(boolean) fields.
+    - Iteration
+        - Has start(datetime), stop(datetime) fields.
+    - Task
+        - Has start(datetime), stop(datetime), billable(boolean) fields.
 
-0.5 - Release
-----------------
+* Provides custom view templates for Project, Iteration, and Task as well as a three top level views:
+        - projects_view
+            - Consulting → Client A.
+        - clients_view
+            - Client A → Consulting.
+        - print_view
+            - Format for print.
 
-* Begin Dexterity content types implementation 
+0.5 - Aug 16, 2009
+------------------
 
-0.4 - Release
-----------------
+* Initial Dexterity content types implementation.
 
-0.3 - Release
-----------------
+0.4 - Aug 14, 2009
+------------------
 
-* Bug fix in iteration_view template
+* Track variable and flat rate fee projects (e.g. consulting and hosting).
+    - Amortize flat rate fee over number of months.
 
-0.2 - Release
-----------------
+* Compute totals for active projects only.
+
+0.3 - Mar 19, 2009
+------------------
+
+* Bug fix in iteration_view template.
+
+0.2 - Mar 19, 2009
+------------------
 
 * Add billable field to task
-* Add sort_on = 'getObjPositionInParent' to projects_view to display projects
-* in order
+* Add sort_on = 'getObjPositionInParent' to projects_view to display projects in order.
 
-0.1 - Release
-----------------
+0.1 - Mar 15, 2009
+------------------
 
-* Initial release
-
-
+* Initial release.
