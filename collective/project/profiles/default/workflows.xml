@@ -2,10 +2,10 @@
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
  <property
     name="title">Contains workflow definitions for your portal</property>
- <object name="project_workflow" meta_type="Workflow"/>
+ <object name="iteration_workflow" meta_type="Workflow"/>
  <bindings>
-  <type type_id="project">
-   <bound-workflow workflow_id="project_workflow"/>
+  <type type_id="iteration">
+   <bound-workflow workflow_id="iteration_workflow"/>
   </type>
  </bindings>
 </object>

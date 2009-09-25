@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="project_workflow"
-             title="Project Workflow" description=""
+<dc-workflow workflow_id="iteration_workflow"
+             title="Project Iteration Workflow" description=""
              state_variable="review_state"
              initial_state="active">
  <permission>Access contents information</permission>

@@ -19,51 +19,49 @@
         <a tal:attributes="href string:++add++iteration">Add Iteration</a>
     </div>
 
-    <table tal:define="global c python: 0" class="listing" id="project">
-        <thead>
-            <tr>
-                <th class="bold">Task</th>
-                <th class="bold">Start</th>
-                <th class="bold">Stop</th>
-                <th class="bold">Hours</th>
-            </tr>
-        </thead>
-        <tal:tasks tal:repeat="task python: context.objectValues()">
-            <tr tal:attributes="class python: view.getOddEven(c)" 
-                tal:define="global c python: c + 1">
-                <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
-                    tal:attributes="href task/absolute_url"><span tal:content="task/Title" /></a>
-                </td>
-                <td tal:content="python: view.getStartDate(task)"></td>
-                <td tal:content="python: view.getStopDate(task)"></td>
-                <td class="align-right" tal:content="python: view.getHours(task)"></td>
-            </tr>
-        </tal:tasks>
-    </table>
+    <tal:iters tal:repeat="iter python: context.objectValues()">
 
-    <div class="align-right">
+        <table tal:define="global c python: 0" class="listing" id="project">
+            <thead>
+                <tr>
+                    <th class="bold">Task</th>
+                    <th class="bold">Start</th>
+                    <th class="bold">Stop</th>
+                    <th class="bold">Hours</th>
+                </tr>
+            </thead>
+                <tal:review_state tal:condition="python: view.reviewStateIsActive(iter)">
+                    <tr tal:attributes="class python: view.getOddEven(c)" 
+                        tal:define="global c python: c + 1">
+                        <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
+                            tal:attributes="href iter/absolute_url"><span tal:content="iter/Title" /></a>
+                        </td>
+                        <td tal:content="python: view.getStartDate(iter)"></td>
+                        <td tal:content="python: view.getStopDate(iter)"></td>
+                        <td class="align-right" tal:content="python: view.getHours(iter)"></td>
+                    </tr>
+                </tal:review_state>
+        </table>
+
         <div class="align-right">
-            Hours: <span tal:content="view/total_hours" />
-        </div>
-<tal:comment replace="nothing">
-        <div class="align-right">
-            Billable: <span tal:content="view/total_billable" />
-        </div>
-</tal:comment>
-        <div class="align-right">
-            <span style="border-bottom: 1px solid black">
-                x Rate: <span tal:content="view/getRate" /></span>
-        </div>
-        <div class="align-right" >
-            = Total: <span tal:content="view/total_income" />
-        </div>
-        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
-            href="folder_contents">Manage contents</a></span></div>
-    </div>
-
-
-
-    <div tal:replace="structure provider:plone.belowcontentbody" />
+            <div class="align-right">
+                (Hours: <span tal:content="python: view.total_hours(iter)" />)
+            </div>
+            <div class="align-right">
+                Billable: <span tal:content="python: view.total_hours_billable(iter)" />
+            </div>
+            <div class="align-right">
+                <span style="border-bottom: 1px solid black">
+                    x Rate: <span tal:content="python: view.getRate()" /></span>
+            </div>
+            <div class="align-right" >
+                = Total: <span tal:content="python: view.total_income(iter)" />
+            </div>
+            <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
+                href="folder_contents">Manage contents</a></span></div>
+            </div>
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+    </tal:iters>
 
 </div>
 
