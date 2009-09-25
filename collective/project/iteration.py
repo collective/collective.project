@@ -106,7 +106,7 @@ class View(grok.View):
 
     def getHours(self,task):
 #        return self.format_float(task.hours)
-        return 'Calculate me.'
+        return self.calculate_billable()
 
 @form.default_value(field=IIteration['start'])
 def startDate(data):

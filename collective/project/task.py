@@ -104,7 +104,7 @@ class View(grok.View):
 
     def format_date(self,d):
         try:
-            d = d.strftime('%Y-%m-%d')
+            d = d.strftime('%Y-%m-%d %I:%M')
             return d
         except:
             return None
