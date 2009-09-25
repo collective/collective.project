@@ -34,7 +34,7 @@ a:hover {
 
 .addtask {
     float: right;
-    border: 1px solid #8cacbb;
+    /* border: 1px solid #8cacbb; */
     background: transparent url(linkTransparent.gif) no-repeat;
     background-position: 4px 13px;
 }
