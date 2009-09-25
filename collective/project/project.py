@@ -5,10 +5,21 @@ from collective.project import projectMessageFactory as _
 import datetime
 
 class IProject(form.Schema):
+
+    title = schema.TextLine(
+            title=_(u"Title"),
+            default=_(u"Consulting"),
+        )
+
+    summary = schema.Text(
+            title=_(u"Summary"),
+            description=_(u"A short summary of the content."),
+            required=False,
+        )
+
     start = schema.Datetime(
             title=_(u"Start date"),
             required=False,
-#            default=_(u"Consulting"),
         )
 
     stop = schema.Datetime(
