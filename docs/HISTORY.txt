@@ -1,8 +1,35 @@
 Changelog
 =========
 
-0.6 - Unreleased
+0.6 - Release
+----------------
+
+* Rename to collective.project
+* Finish Dexterity content types implementation
+
+0.5 - Release
+----------------
+
+* Begin Dexterity content types implementation 
+
+0.4 - Release
+----------------
+
+0.3 - Release
+----------------
+
+* Bug fix in iteration_view template
+
+0.2 - Release
+----------------
+
+* Add billable field to task
+* Add sort_on = 'getObjPositionInParent' to projects_view to display projects
+* in order
+
+0.1 - Release
 ----------------
 
 * Initial release
+
 
