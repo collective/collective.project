@@ -17,10 +17,7 @@
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">plone.dexterity.content.Item</property>
- <property name="behaviors">
-  <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
-  <element value="plone.app.content.interfaces.INameFromTitle"/>
- </property>
+ <property name="behaviors"></property>
  <property name="schema">collective.project.task.ITask</property>
  <property name="model_source"></property>
  <property name="model_file"></property>
