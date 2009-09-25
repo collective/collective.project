@@ -8,6 +8,7 @@ class IProject(form.Schema):
     start = schema.Datetime(
             title=_(u"Start date"),
             required=False,
+#            default=_(u"Consulting"),
         )
 
     stop = schema.Datetime(

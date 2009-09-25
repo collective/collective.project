@@ -76,7 +76,10 @@ class View(grok.View):
         seconds = days * 86400
         hours = float((self.total_hours_billable().seconds + seconds)/3600)
         rate = self.getRate()
-        return self.format_float(hours * rate)
+        try:
+            return self.format_float(hours * rate)
+        except:
+            return self.format_float(hours * 0.0)
 
     def getOddEven(self,counter):
         if counter % 2 == 0:

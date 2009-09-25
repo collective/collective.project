@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <object name="project" meta_type="Dexterity FTI"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Project</property>
+ <property name="title">Client</property>
  <property name="description">None</property>
  <property name="content_icon"></property>
  <property name="factory">project</property>
  <property name="immediate_view">view</property>
- <property name="global_allow">False</property>
+ <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
 
  <property name="allowed_content_types">
-     <element value="iteration" />
+     <element value="project" />
  </property>
 
  <property name="allow_discussion">False</property>
@@ -25,7 +25,7 @@
   <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
   <element value="plone.app.content.interfaces.INameFromTitle"/>
  </property>
- <property name="schema">collective.project.project.IProject</property>
+ <property name="schema">collective.project.client.IClient</property>
  <property name="model_source"></property>
  <property name="model_file"></property>
  <alias from="(Default)" to="(selected layout)"/>
