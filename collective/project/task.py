@@ -31,6 +31,12 @@ class ITask(form.Schema):
             required=False,
         )
 
+    billable = schema.Bool(
+            title=_(u"Billable?"),
+            required=True,
+            default=True,
+        )
+
 class View(grok.View):
     grok.context(ITask)
     grok.require('zope2.View')

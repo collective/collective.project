@@ -47,15 +47,19 @@ class View(grok.View):
         return ' &rarr; '.join(results)
 
     def total_hours(self):
-        try:
-            hours = 0.0
-            tasks = self.context.aq_inner.objectValues()
-            for task in tasks:
-                hours += task.hours
-        except:
-            hours = 0.0
+        hours = datetime.timedelta(0)
+        tasks = self.context.objectValues()
+        for task in tasks:
+            hours += task.stop - task.start
+        return hours
 
-        return self.format_float(hours)
+    def total_hours_billable(self):
+        hours = datetime.timedelta(0)
+        tasks = self.context.objectValues()
+        for task in tasks:
+            if task.billable:
+                hours += task.stop - task.start
+        return hours
 
     def format_float(self,f):
         try:
@@ -65,25 +69,14 @@ class View(grok.View):
             return None
 
     def getRate(self):
-        return self.format_float(self.context.aq_inner.rate)
+        return self.context.aq_inner.aq_parent.rate
 
     def total_income(self):
-        try:
-            return self.format_float(self.calculate_billable() * self.context.aq_inner.rate)
-        except:
-            return self.format_float(self.calculate_billable() * 0.0)
-
-    def calculate_billable(self):
-        try:
-            hours = 0.0
-            tasks = self.context.aq_inner.objectValues()
-            for task in tasks:
-                if task.billable:
-                    hours += task.hours
-        except:
-            hours = 0.0
-
-        return hours
+        days = self.total_hours_billable().days
+        seconds = days * 86400
+        hours = float((self.total_hours_billable().seconds + seconds)/3600)
+        rate = self.getRate()
+        return self.format_float(hours * rate)
 
     def getOddEven(self,counter):
         if counter % 2 == 0:
@@ -99,14 +92,13 @@ class View(grok.View):
 
     def format_date(self,d):
         try:
-            d = d.strftime('%Y-%m-%d')
+            d = d.strftime('%Y-%m-%d %I:%M')
             return d
         except:
             return None
 
     def getHours(self,task):
-#        return self.format_float(task.hours)
-        return self.calculate_billable()
+        return task.stop - task.start
 
 @form.default_value(field=IIteration['start'])
 def startDate(data):

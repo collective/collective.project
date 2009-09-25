@@ -36,20 +36,22 @@
                 </td>
                 <td tal:content="python: view.getStartDate(task)"></td>
                 <td tal:content="python: view.getStopDate(task)"></td>
-                <td class="align-right" tal:content="python: view.getHours(task)"></td>
+                <td class="align-right">
+                    <strike tal:omit-tag="task/billable">
+                        <span tal:content="python: view.getHours(task)" />
+                    </strike>
+                </td>
             </tr>
         </tal:tasks>
     </table>
 
     <div class="align-right">
         <div class="align-right">
-            Hours: <span tal:content="view/total_hours" />
+            (Hours: <span tal:content="view/total_hours" />)
         </div>
-<tal:comment replace="nothing">
         <div class="align-right">
-            Billable: <span tal:content="view/total_billable" />
+            Billable: <span tal:content="view/total_hours_billable" />
         </div>
-</tal:comment>
         <div class="align-right">
             <span style="border-bottom: 1px solid black">
                 x Rate: <span tal:content="view/getRate" /></span>
