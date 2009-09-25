@@ -1,52 +1,68 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+<html>
+<body metal:use-macro="here/main_template/macros/master">
 
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
+<metal:block fill-slot="top_slot"
+             tal:define="dummy python:request.set('disable_border',1)" />
 
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
+<head>
+    <metal:css fill-slot="css_slot">
+        <style type="text/css" media="all"
+                tal:content="string: @import url(${context/++resource++project.css});"></style>
+    </metal:css>
+</head>
 
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+<div metal:fill-slot="main">
 
-      lang="en"
+    <h1 tal:content="structure python: view.getIterTitle(view.context)">Client → Project</h1>
 
-      metal:use-macro="context/main_template/macros/master"
+    <div class="addtask visualNoPrint"> 
+        <a tal:attributes="href string:++add++task">Add Task</a>
+    </div>
 
-      i18n:domain="example.conference">
+    <table tal:define="global c python: 0" class="listing" id="project">
+        <thead>
+            <tr>
+                <th class="bold">Task</th>
+                <th class="bold">Start</th>
+                <th class="bold">Stop</th>
+                <th class="bold">Hours</th>
+            </tr>
+        </thead>
+        <tr> 
+            <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
+                tal:attributes="href python: view.context.absolute_url() + '/edit'"><span tal:content="view/context/Title" /></a>
+            </td>
+            <td tal:content="python: view.getStartDate()"></td>
+            <td tal:content="python: view.getStopDate()"></td>
+            <td class="align-right" tal:content="python: view.getHours()"></td>
+        </tr>
+    </table>
 
-<body>
+    <div class="align-right">
+        <div class="align-right">
+            Hours: <span tal:content="view/total_hours" />
+        </div>
+<tal:comment replace="nothing">
+        <div class="align-right">
+            Billable: <span tal:content="view/total_billable" />
+        </div>
+</tal:comment>
+        <div class="align-right">
+            <span style="border-bottom: 1px solid black">
+                x Rate: <span tal:content="view/getRate" /></span>
+        </div>
+        <div class="align-right" >
+            = Total: <span tal:content="view/total_income" />
+        </div>
+        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
+            href="folder_contents">Manage contents</a></span></div>
+    </div>
 
 
 
-<metal:main fill-slot="main">
+    <div tal:replace="structure provider:plone.belowcontentbody" />
 
-    <tal:main-macro metal:define-macro="main"
-
-        tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime">
-
-
-
-        <div tal:replace="structure provider:plone.abovecontenttitle" />
-
-        <h1 class="documentFirstHeading" tal:content="context/title" />
-
-        <div tal:replace="structure provider:plone.belowcontenttitle" />
-
-        <p class="documentDescription" tal:content="context/description" />
-
-        <div tal:replace="structure provider:plone.abovecontentbody" />
-
-        <div tal:content="structure context/start" />
-
-        <div tal:content="structure context/stop" />
-
-        <div tal:replace="structure provider:plone.belowcontentbody" />
-
-
-    </tal:main-macro>
-
-</metal:main>
-
-
+</div>
 
 </body>
-
 </html>
