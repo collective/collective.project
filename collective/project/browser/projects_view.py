@@ -26,17 +26,21 @@ class ProjectsView(BrowserView):
         return self.sortedDictValues3(results)
 
     def project_totals(self,project):
+        proj = project.getObject()
+        name, hours, rate, start, stop, projects = (
+            proj.Title(), None, proj.rate, None, None, proj.objectValues())
+
         iter = None
-        obj = project.getObject()
-        name,hours,rate,start,stop,iters = (obj.Title(), 0.0, obj.rate, obj.start, 
-            obj.stop, obj.objectValues())
-        for iter in iters:
+        for iter in projects:
+            start = iter.start
+            stop = iter.stop
             tasks = iter.objectValues()
             hours = datetime.timedelta(0)
             for task in tasks:
                 hours += task.stop - task.start
+
         if iter is not None:
-            if not obj.flat and rate is not None:
+            if not proj.flat and rate is not None:
                 days = self.total_hours_billable(iter).days
                 seconds = days * 86400
                 hours = float((self.total_hours_billable(iter).seconds + seconds)/3600)
@@ -51,7 +55,7 @@ class ProjectsView(BrowserView):
                 else:
                     name,hours,rate,start,stop,total = name,hours,rate,start,stop,rate
 
-            if not obj.billable:
+            if not proj.billable:
                 total = 0.0
                 name,hours,rate,start,stop,total = name,hours,rate,start,stop,total
 
