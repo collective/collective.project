@@ -6,6 +6,7 @@ import datetime
 from BTrees.Length import Length
 
 class ITask(form.Schema):
+    form.mode(id='hidden')
     id = schema.TextLine(
             title=_(u"Id"),
         )
