@@ -5,8 +5,6 @@
 
   <include package="plone.app.contentmenu" />
 
-  <!-- -*- extra stuff goes here -*- -->
-
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="projects_view"
@@ -25,22 +23,6 @@
 
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="clients_view"
-      class=".projects_view.ProjectsView"
-      template="clients_view.pt"
-      permission="zope2.View"
-  />
-
-  <browser:page
-      for="Products.ATContentTypes.interface.IATFolder"
-      name="projects_view"
-      class=".projects_view.ProjectsView"
-      template="projects_view.pt"
-      permission="zope2.View"
-  />
-
-  <browser:page
-      for="Products.ATContentTypes.interface.IATFolder"
       name="clients_view"
       class=".projects_view.ProjectsView"
       template="clients_view.pt"
