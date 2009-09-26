@@ -17,9 +17,9 @@ Changelog
 
 * Provides custom view templates for Project, Iteration, and Task as well as a three top level views:
         - projects_view
-            - Consulting → Client A.
+            - Consulting -> Client A.
         - clients_view
-            - Client A → Consulting.
+            - Client A -> Consulting.
         - print_view
             - Format for print.
 
