@@ -1,9 +1,10 @@
 from five import grok
 from zope import schema
-from plone.directives import form, dexterity
+from plone.directives import form
 from collective.project import projectMessageFactory as _
 import datetime
 from BTrees.Length import Length
+
 
 class ITask(form.Schema):
     form.mode(id='hidden')
@@ -37,22 +38,25 @@ class ITask(form.Schema):
             default=True,
         )
 
+
 class View(grok.View):
     grok.context(ITask)
     grok.require('zope2.View')
 
-    def getIterTitle(self,project):
+    def getIterTitle(self, project):
         client_breadcrumbs = self.client_breadcrumbs(project)
         try:
-            return self.context.portal_properties.project_properties.iteration + ' &rarr; ' + client_breadcrumbs
+            iter = self.context.portal_properties.project_properties.iteration
+            return iter + ' &rarr; ' + client_breadcrumbs
         except:
             return 'Active Projects &rarr; ' + client_breadcrumbs
 
-    def client_breadcrumbs(self,project):
+    def client_breadcrumbs(self, project):
         results = []
         path = list(project.getPhysicalPath())[2:]
         for i in range(len(path)):
-            results.append(self.context.restrictedTraverse('/'.join(path)).Title())
+            title = self.context.restrictedTraverse('/'.join(path)).Title()
+            results.append(title)
             path.pop()
         results.reverse()
         return ' &rarr; '.join(results)
@@ -68,7 +72,7 @@ class View(grok.View):
 
         return self.format_float(hours)
 
-    def format_float(self,f):
+    def format_float(self, f):
         try:
             f = '%.2f' % f
             return f
@@ -80,7 +84,8 @@ class View(grok.View):
 
     def total_income(self):
         try:
-            return self.format_float(self.calculate_billable() * self.context.aq_inner.rate)
+            return self.format_float(self.calculate_billable() *
+                self.context.aq_inner.rate)
         except:
             return self.format_float(self.calculate_billable() * 0.0)
 
@@ -96,7 +101,7 @@ class View(grok.View):
 
         return hours
 
-    def getOddEven(self,counter):
+    def getOddEven(self, counter):
         if counter % 2 == 0:
             return 'even'
         else:
@@ -108,7 +113,7 @@ class View(grok.View):
     def getStopDate(self):
         return self.format_date(self.context.stop)
 
-    def format_date(self,d):
+    def format_date(self, d):
         try:
             d = d.strftime('%Y-%m-%d %I:%M')
             return d
@@ -118,17 +123,21 @@ class View(grok.View):
     def getHours(self):
         return str(self.context.stop - self.context.start)
 
+
 @form.default_value(field=ITask['start'])
 def startDate(data):
     return datetime.datetime.today()
+
 
 @form.default_value(field=ITask['stop'])
 def stopDate(data):
     # stop in one hour
     return datetime.datetime.today() + datetime.timedelta(hours=1)
 
+
 @form.default_value(field=ITask['id'])
-def getNextCounter(self): # Some (slightly modified) Joel Burton Fu, from SimpleCollector.
+def getNextCounter(self): # Some (slightly modified) Joel Burton Fu,
+    # from SimpleCollector.
         """Get next ID. Lazily creates counter if neccessary.
         """
         self = self.context
