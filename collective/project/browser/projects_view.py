@@ -30,43 +30,53 @@ class ProjectsView(BrowserView):
         name, hours, rate, start, stop, projects = (
             proj.Title(), None, proj.rate, None, None, proj.objectValues())
 
-        iter = None
-        for iter in projects:
-            start = iter.start
-            stop = iter.stop
-            tasks = iter.objectValues()
-            hours = datetime.timedelta(0)
-            for task in tasks:
-                hours += task.stop - task.start
-
-        if iter is not None:
-            if not proj.flat and rate is not None:
-                days = self.total_hours_billable(iter).days
-                seconds = days * 86400
-                hours = float((self.total_hours_billable(iter).seconds + seconds)/3600)
-                name,hours,rate,start,stop,total = name,hours,rate,start,stop,hours * rate
-            else: # flat rate
-                # amortize
-                if start is not None and stop is not None and rate is not None:
-                    diff=stop-start
-                    months = diff.days/30
-                    amort = rate/months
-                    name,hours,rate,start,stop,total = name,hours,rate,start,stop,amort
-                else:
-                    name,hours,rate,start,stop,total = name,hours,rate,start,stop,rate
-                return ([name,hours,rate,start,stop,total])
-
-            if not proj.billable:
-                total = 0.0
-                name,hours,rate,start,stop,total = name,hours,rate,start,stop,total
-
-            total,hours,rate=(self.format_float(total),
-                              self.format_float(hours),
-                              self.format_float(rate))
-            start,stop=self.format_date(start),self.format_date(stop)  
-            return ([name,hours,rate,start,stop,total])
+        if proj.flat:
+            diff=proj.stop-proj.start
+            months = diff.days/30
+            amort = self.format_float(rate/months)
+            total = amort
         else:
-            return (0,0,0,0,0,0)
+            total = self.format_float(0.0)
+
+        return ([name,hours,rate,start,stop,total])
+
+#        iter = None
+#        for iter in projects:
+#            start = iter.start
+#            stop = iter.stop
+#            tasks = iter.objectValues()
+#            hours = datetime.timedelta(0)
+#            for task in tasks:
+#                hours += task.stop - task.start
+#
+##        if iter is not None:
+##            if not proj.flat and rate is not None:
+##                days = self.total_hours_billable(iter).days
+##                seconds = days * 86400
+##                hours = float((self.total_hours_billable(iter).seconds + seconds)/3600)
+##                name,hours,rate,start,stop,total = name,hours,rate,start,stop,hours * rate
+##            else: # flat rate
+##                # amortize
+##                if start is not None and stop is not None and rate is not None:
+##                    diff=stop-start
+##                    months = diff.days/30
+##                    amort = rate/months
+##                    name,hours,rate,start,stop,total = name,hours,rate,start,stop,amort
+##                else:
+##                    name,hours,rate,start,stop,total = name,hours,rate,start,stop,rate
+##                return ([name,hours,rate,start,stop,total])
+#
+#            if not proj.billable:
+#                total = 0.0
+#                name,hours,rate,start,stop,total = name,hours,rate,start,stop,total
+#
+#            total,hours,rate=(self.format_float(total),
+#                              self.format_float(hours),
+#                              self.format_float(rate))
+#            start,stop=self.format_date(start),self.format_date(stop)  
+#            return ([name,hours,rate,start,stop,total])
+#        else:
+#            return (0,0,0,0,0,0)
 
     def format_float(self,f):
         try:
