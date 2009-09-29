@@ -4,7 +4,7 @@ Changelog
 0.7 - Sep 29, 2009
 ------------------
 
-* Packaging and bug fixes
+* Package and bug fixes
     - Package shipped without top level docs directory, fixed.
     - projects_view was broken in several ways, fixed.
 
