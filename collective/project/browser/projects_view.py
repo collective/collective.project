@@ -27,19 +27,24 @@ class ProjectsView(BrowserView):
 
     def project_totals(self,project):
         proj = project.getObject()
-        name, hours, rate, start, stop, projects = (
-            proj.Title(), None, proj.rate, None, None, proj.objectValues())
+        rate = proj.rate
+        title = proj.Title()
 
         if proj.flat:
-            diff=proj.stop-proj.start
+            diff= proj.stop - proj.start
             months = diff.days/30
-            amort = self.format_float(rate/months)
+            amort = self.format_float(rate / months)
             total = amort
         else:
             total = self.format_float(0.0)
 
-        return ([name,hours,rate,start,stop,total])
+        td = datetime.timedelta
+        hours, start, stop = td(0), td(0), td(0)
+        return ([title, hours, rate, start, stop, total])
 
+#        td = datetime.timedelta
+#        start, stop = td(0), td(0)
+#        projects = proj.objectValues()
 #        iter = None
 #        for iter in projects:
 #            start = iter.start
