@@ -50,6 +50,9 @@ class ProjectsView(BrowserView):
                 hours = float((self.total_hours_billable(iter).seconds + seconds) / 3600)
                 total = hours * rate
 
+        if not proj.billable:
+            total = 0.0
+
         return ([title, hours, rate, start, stop, total])
 
 #        td = datetime.timedelta
