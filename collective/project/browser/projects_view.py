@@ -31,6 +31,7 @@ class ProjectsView(BrowserView):
         title = proj.Title()
         td = datetime.timedelta
         hours, start, stop = td(0), td(0), td(0)
+        total = 0.0
 
         if proj.flat:
             start = proj.start
