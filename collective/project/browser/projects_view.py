@@ -45,7 +45,7 @@ class ProjectsView(BrowserView):
                 seconds = days * 86400
                 hours = float((self.total_hours_billable(iter).seconds + seconds)/3600)
                 name,hours,rate,start,stop,total = name,hours,rate,start,stop,hours * rate
-            else:
+            else: # flat rate
                 # amortize
                 if start is not None and stop is not None and rate is not None:
                     diff=stop-start
@@ -54,6 +54,7 @@ class ProjectsView(BrowserView):
                     name,hours,rate,start,stop,total = name,hours,rate,start,stop,amort
                 else:
                     name,hours,rate,start,stop,total = name,hours,rate,start,stop,rate
+                return ([name,hours,rate,start,stop,total])
 
             if not proj.billable:
                 total = 0.0
