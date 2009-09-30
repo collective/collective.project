@@ -62,15 +62,11 @@ class View(grok.View):
         return ' &rarr; '.join(results)
 
     def total_hours(self):
-        try:
-            hours = 0.0
-            tasks = self.context.aq_inner.objectValues()
-            for task in tasks:
-                hours += task.hours
-        except:
-            hours = 0.0
-
-        return self.format_float(hours)
+        task = self.context
+        td = datetime.timedelta
+        hours = td(0)
+        hours = task.stop - task.start
+        return hours
 
     def format_float(self, f):
         try:
