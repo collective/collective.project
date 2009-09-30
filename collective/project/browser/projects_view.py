@@ -47,7 +47,6 @@ class ProjectsView(BrowserView):
             stop = iter.stop
             tasks = iter.objectValues()
             for task in tasks:
-                hours += task.stop - task.start
                 days = self.total_hours_billable(iter).days
                 seconds = days * 86400
                 hours = float((self.total_hours_billable(iter).seconds + seconds) / 3600)
