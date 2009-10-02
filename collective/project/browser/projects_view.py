@@ -38,7 +38,10 @@ class ProjectsView(BrowserView):
             stop = proj.stop
             diff = stop - start
             months = diff.days/30
-            amort = rate / months
+            if months is not 0:
+                amort = rate / months
+            else:
+                amort = rate
             total = amort
 
         projects = proj.objectValues()
@@ -57,7 +60,8 @@ class ProjectsView(BrowserView):
 
         ff = self.format_float
         hours, rate, total = ff(hours), ff(rate), ff(total)
-
+        fd = self.format_date
+        start, stop = fd(start), fd(stop)
         return ([title, hours, rate, start, stop, total])
 
     def format_float(self,f):
@@ -120,4 +124,15 @@ class ProjectsView(BrowserView):
             if task.billable:
                 hours += task.stop - task.start
         return hours
+
+    def getPrintable(self):
+        text=''
+        for p in self.getProjects('sort-on-projects'):
+            for col in self.project_totals(p):
+                try: 
+                    text = text + col
+                except:
+                    text = text + ' - '
+            text = text + '\n'
+        return text
 
