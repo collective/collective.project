@@ -9,6 +9,13 @@
         <style type="text/css" media="all"
                 tal:content="string: @import url(${context/++resource++project.css});"></style>
     </metal:css>
+
+    <metal:title_slot fill-slot="title_slot">
+
+        <title tal:content="structure python: view.getIterTitle(view.context)">Client → Project</title>
+
+    </metal:title_slot>
+
 </head>
 
 <div metal:fill-slot="main">
