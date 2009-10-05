@@ -37,6 +37,13 @@ class View(grok.View):
         except:
             return 'Active Projects &rarr; ' + client_breadcrumbs
 
+    def getIterTitlePlain(self,project):
+        client_breadcrumbs = self.client_breadcrumbs(project)
+        try:
+            return self.context.portal_properties.project_properties.iteration + ' -> ' + client_breadcrumbs
+        except:
+            return 'Active Projects -> ' + client_breadcrumbs
+
     def client_breadcrumbs(self,project):
         results = []
         path = list(project.getPhysicalPath())[2:]
@@ -105,12 +112,17 @@ class View(grok.View):
 
 @form.default_value(field=IIteration['start'])
 def startDate(data):
-    return datetime.datetime.today()
+    # start on first day of current month
+    now = datetime.datetime.now()
+    first_day = datetime.datetime(now.year, now.month, 1)
+    return first_day
 
 @form.default_value(field=IIteration['stop'])
 def stopDate(data):
     # stop in one month
-    return datetime.datetime.today() + datetime.timedelta(days=calendar.mdays[datetime.date.today().month])
+    now = datetime.datetime.now()
+    last_day = calendar.monthrange(now.year, now.month)[1]
+    return datetime.datetime(now.year, now.month, last_day)
 
 @form.default_value(field=IIteration['title'])
 def iterTitle(data):
