@@ -34,4 +34,16 @@
       file="project.css"
   />
 
+  <browser:page
+      for="Products.CMFPlone.Portal.PloneSite"
+      name="iteration_tool"
+      class=".iteration_tool.ConfigureIteration"
+      permission="cmf.ManagePortal"
+  />
+
+  <utility
+      component=".iteration_tool.projectsVocab"
+      name="projects_vocab"
+  />
+
 </configure>
