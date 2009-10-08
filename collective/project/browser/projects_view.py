@@ -44,12 +44,13 @@ class ProjectsView(BrowserView):
 
         projects = proj.objectValues()
         for iter in projects:
-            start = iter.start
-            stop = iter.stop
-            tasks = iter.objectValues()
-            for task in tasks:
-                hours = float(self.total_hours(iter,billable_only=True).seconds)/float(3600)
-                total = hours * rate
+            if self.reviewStateIsActive(iter):
+                start = iter.start
+                stop = iter.stop
+                tasks = iter.objectValues()
+                for task in tasks:
+                    hours = float(self.total_hours(iter,billable_only=True).seconds)/float(3600)
+                    total = hours * rate
 
         if not proj.billable:
             total = 0.0
@@ -140,3 +141,9 @@ class ProjectsView(BrowserView):
             text = text + '\n'
         return text
 
+    def reviewStateIsActive(self,iter):
+        wftool = self.context.portal_workflow
+        if wftool.getInfoFor(iter, 'review_state') == 'active':
+            return True
+        else:
+            return False
