@@ -20,44 +20,43 @@
     </div>
 
     <tal:iters tal:repeat="iter python: context.objectValues()">
-
-        <table tal:define="global c python: 0" class="listing" id="project">
-            <thead>
-                <tr>
-                    <th class="bold">Task</th>
-                    <th class="bold">Start</th>
-                    <th class="bold">Stop</th>
-                    <th class="bold">Hours</th>
-                </tr>
-            </thead>
-                <tal:review_state tal:condition="python: view.reviewStateIsActive(iter)">
-                    <tr tal:attributes="class python: view.getOddEven(c)" 
-                        tal:define="global c python: c + 1">
-                        <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
-                            tal:attributes="href iter/absolute_url"><span tal:content="iter/Title" /></a>
-                        </td>
-                        <td tal:content="python: view.getStartDate(iter)"></td>
-                        <td tal:content="python: view.getStopDate(iter)"></td>
-                        <td class="align-right" tal:content="python: view.getHours(iter)"></td>
+        <tal:review_state tal:condition="python: view.reviewStateIsActive(iter)">
+            <table tal:define="global c python: 0" class="listing" id="project">
+                <thead>
+                    <tr>
+                        <th class="bold">Task</th>
+                        <th class="bold">Start</th>
+                        <th class="bold">Stop</th>
+                        <th class="bold">Hours</th>
                     </tr>
-                </tal:review_state>
-        </table>
+                </thead>
+                        <tr tal:attributes="class python: view.getOddEven(c)" 
+                            tal:define="global c python: c + 1">
+                            <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
+                                tal:attributes="href iter/absolute_url"><span tal:content="iter/Title" /></a>
+                            </td>
+                            <td tal:content="python: view.getStartDate(iter)"></td>
+                            <td tal:content="python: view.getStopDate(iter)"></td>
+                            <td class="align-right" tal:content="python: view.getHours(iter)"></td>
+                        </tr>
+            </table>
 
-        <div class="align-right">
             <div class="align-right">
-                (Hours: <span tal:content="python: view.total_hours(iter)" />)
+                <div class="align-right">
+                    (Hours: <span tal:content="python: view.total_hours(iter)" />)
+                </div>
+                <div class="align-right">
+                    Billable: <span tal:content="python: view.total_hours_billable(iter)" />
+                </div>
+                <div class="align-right">
+                    <span style="border-bottom: 1px solid black">
+                        x Rate: <span tal:content="python: view.getRate()" /></span>
+                </div>
+                <div class="align-right" >
+                    = Total: <span tal:content="python: view.total_income(iter)" />
+                </div>
             </div>
-            <div class="align-right">
-                Billable: <span tal:content="python: view.total_hours_billable(iter)" />
-            </div>
-            <div class="align-right">
-                <span style="border-bottom: 1px solid black">
-                    x Rate: <span tal:content="python: view.getRate()" /></span>
-            </div>
-            <div class="align-right" >
-                = Total: <span tal:content="python: view.total_income(iter)" />
-            </div>
-        </div>
+        </tal:review_state>
     </tal:iters>
 
     <div tal:replace="structure provider:plone.belowcontentbody" />
