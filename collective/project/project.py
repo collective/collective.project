@@ -48,30 +48,55 @@ class View(grok.View):
     grok.context(IProject)
     grok.require('zope2.View')
 
-    def total_hours(self,iter):
-        hours = datetime.timedelta(0)
-        tasks = iter.objectValues()
-        for task in tasks:
-            hours += task.stop - task.start
-        return hours
+#    def total_hours(self,iter):
+#        hours = datetime.timedelta(0)
+#        tasks = iter.objectValues()
+#        for task in tasks:
+#            hours += task.stop - task.start
+#        return hours
+#
+#    def total_hours_billable(self,iter):
+#        hours = datetime.timedelta(0)
+#        tasks = iter.objectValues()
+#        for task in tasks:
+#            if task.billable:
+#                hours += task.stop - task.start
+#        return hours
+#
+#    def total_income(self,iter):
+#        days = self.total_hours_billable(iter).days
+#        seconds = days * 86400
+#        hours = float((self.total_hours_billable(iter).seconds + seconds)/3600)
+#        rate = self.getRate()
+#        try:
+#            return self.format_float(hours * rate)
+#        except:
+#            return self.format_float(hours * 0.0)
 
-    def total_hours_billable(self,iter):
-        hours = datetime.timedelta(0)
-        tasks = iter.objectValues()
-        for task in tasks:
-            if task.billable:
+
+
+    def total_hours(self,iter,billable_only=False):
+        if billable_only:
+            hours = datetime.timedelta(0)
+            tasks = iter.objectValues()
+            for task in tasks:
+                if task.billable:
+                    hours += task.stop - task.start
+            return hours
+        else:
+            hours = datetime.timedelta(0)
+            tasks = iter.objectValues()
+            for task in tasks:
                 hours += task.stop - task.start
-        return hours
+            return hours
 
     def total_income(self,iter):
-        days = self.total_hours_billable(iter).days
-        seconds = days * 86400
-        hours = float((self.total_hours_billable(iter).seconds + seconds)/3600)
+        hours = float(self.total_hours(iter,billable_only=True).seconds)/float(3600)
         rate = self.getRate()
         try:
-            return self.format_float(hours * rate)
+            return self.ff(hours * rate)
         except:
-            return self.format_float(hours * 0.0)
+            return self.ff(hours * 0.0)
 
     def project_title(self):
         project = self.context.Title()
@@ -86,7 +111,8 @@ class View(grok.View):
         results.reverse()
         return ' &rarr; '.join(results)
 
-    def format_float(self,f):
+    def ff(self,f):
+        # format float
         try:
             f = '%.2f' % f
             return f
@@ -107,9 +133,9 @@ class View(grok.View):
         return self.format_date(task.stop)
 
     def getHours(self,iter):
-        total_hours = self.total_hours(iter)
-        total_hours_billable = self.total_hours_billable(iter)
-        return 'Total: %s, Billable: %s' % (total_hours, total_hours_billable)
+        th = self.total_hours(iter)
+        thb = self.total_hours(iter,billable_only=True)
+        return 'Total: %s, Billable: %s' % (th, thb)
 
     def getRate(self):
         return self.context.rate

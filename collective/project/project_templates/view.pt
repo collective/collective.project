@@ -46,7 +46,7 @@
                     (Hours: <span tal:content="python: view.total_hours(iter)" />)
                 </div>
                 <div class="align-right">
-                    Billable: <span tal:content="python: view.total_hours_billable(iter)" />
+                    Billable: <span tal:content="python: view.total_hours(iter,billable_only=True)" />
                 </div>
                 <div class="align-right">
                     <span style="border-bottom: 1px solid black">
