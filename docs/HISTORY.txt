@@ -1,6 +1,19 @@
 Changelog
 =========
 
+0.8 - Oct 8, 2009
+-----------------
+
+* Bug fixes:
+    - Fix hours calculation for increments of time < 1 hour.
+    - Calculate totals for active iterations only.
+    - Don't show inactive iterations in iteration_templates/view.pt.
+
+* Change defaults for start and stop of projects & iterations.
+    - Start and stop iteration on first day and last day of current month.
+    - Start and stop project on first day day of current month and last day of
+      current month plus one year.
+
 0.7 - Sep 29, 2009
 ------------------
 
