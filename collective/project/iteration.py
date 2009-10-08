@@ -53,20 +53,20 @@ class View(grok.View):
         results.reverse()
         return ' &rarr; '.join(results)
 
-    def total_hours(self):
-        hours = datetime.timedelta(0)
-        tasks = self.context.objectValues()
-        for task in tasks:
-            hours += task.stop - task.start
-        return hours
-
-    def total_hours_billable(self):
-        hours = datetime.timedelta(0)
-        tasks = self.context.objectValues()
-        for task in tasks:
-            if task.billable:
+    def total_hours(self,billable_only=False):
+        if billable_only:
+            hours = datetime.timedelta(0)
+            tasks = self.context.objectValues()
+            for task in tasks:
+                if task.billable:
+                    hours += task.stop - task.start
+            return hours
+        else:
+            hours = datetime.timedelta(0)
+            tasks = self.context.objectValues()
+            for task in tasks:
                 hours += task.stop - task.start
-        return hours
+            return hours
 
     def format_float(self,f):
         try:
@@ -78,15 +78,20 @@ class View(grok.View):
     def getRate(self):
         return self.context.aq_inner.aq_parent.rate
 
+#    def total_income(self):
+#        days = self.total_hours_billable().days
+#        seconds = days * 86400
+#        hours = float((self.total_hours_billable().seconds + seconds)/3600)
+#        rate = self.getRate()
+
     def total_income(self):
-        days = self.total_hours_billable().days
-        seconds = days * 86400
-        hours = float((self.total_hours_billable().seconds + seconds)/3600)
+        hours = float(self.total_hours(billable_only=True).seconds)/float(3600)
         rate = self.getRate()
         try:
             return self.format_float(hours * rate)
         except:
             return self.format_float(hours * 0.0)
+
 
     def getOddEven(self,counter):
         if counter % 2 == 0:
