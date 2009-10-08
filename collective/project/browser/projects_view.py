@@ -50,21 +50,26 @@ class ProjectsView(BrowserView):
             stop = iter.stop
             tasks = iter.objectValues()
             for task in tasks:
-                days = self.total_hours_billable(iter).days
-                seconds = days * 86400
-                hours = float((self.total_hours_billable(iter).seconds + seconds) / 3600)
+
+#                days = self.total_hours(iter,billable_only=True).days
+#                seconds = days * 86400
+
+                hours = float(self.total_hours(iter,billable_only=True).seconds)/float(3600)
+
+#                hours = float((self.total_hours_billable(iter).seconds + seconds) / 3600)
                 total = hours * rate
 
         if not proj.billable:
             total = 0.0
-
-        ff = self.format_float
+        
+        ff = self.ff
         hours, rate, total = ff(hours), ff(rate), ff(total)
         fd = self.format_date
         start, stop = fd(start), fd(stop)
         return ([title, hours, rate, start, stop, total])
 
-    def format_float(self,f):
+    def ff(self,f):
+        # format float
         try:
             f = '%.2f' % f
             return f
@@ -117,13 +122,28 @@ class ProjectsView(BrowserView):
         except:
             return 'Active Projects'
 
-    def total_hours_billable(self,iter):
-        hours = datetime.timedelta(0)
-        tasks = iter.objectValues()
-        for task in tasks:
-            if task.billable:
+#    def total_hours(self,iter,billable_only=True):
+#        hours = datetime.timedelta(0)
+#        tasks = iter.objectValues()
+#        for task in tasks:
+#            if task.billable:
+#                hours += task.stop - task.start
+#        return hours
+
+    def total_hours(self,iter,billable_only=False):
+        if billable_only:
+            hours = datetime.timedelta(0)
+            tasks = iter.objectValues()
+            for task in tasks:
+                if task.billable:
+                    hours += task.stop - task.start
+            return hours
+        else:
+            hours = datetime.timedelta(0)
+            tasks = iter.objectValues()
+            for task in tasks:
                 hours += task.stop - task.start
-        return hours
+            return hours
 
     def getPrintable(self):
         text=''
