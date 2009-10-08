@@ -3,6 +3,7 @@ from zope import schema
 from plone.directives import form
 from collective.project import projectMessageFactory as _
 import datetime
+import calendar
 
 class IProject(form.Schema):
 
@@ -47,33 +48,6 @@ class IProject(form.Schema):
 class View(grok.View):
     grok.context(IProject)
     grok.require('zope2.View')
-
-#    def total_hours(self,iter):
-#        hours = datetime.timedelta(0)
-#        tasks = iter.objectValues()
-#        for task in tasks:
-#            hours += task.stop - task.start
-#        return hours
-#
-#    def total_hours_billable(self,iter):
-#        hours = datetime.timedelta(0)
-#        tasks = iter.objectValues()
-#        for task in tasks:
-#            if task.billable:
-#                hours += task.stop - task.start
-#        return hours
-#
-#    def total_income(self,iter):
-#        days = self.total_hours_billable(iter).days
-#        seconds = days * 86400
-#        hours = float((self.total_hours_billable(iter).seconds + seconds)/3600)
-#        rate = self.getRate()
-#        try:
-#            return self.format_float(hours * rate)
-#        except:
-#            return self.format_float(hours * 0.0)
-
-
 
     def total_hours(self,iter,billable_only=False):
         if billable_only:
@@ -162,9 +136,14 @@ class View(grok.View):
 
 @form.default_value(field=IProject['start'])
 def startDate(data):
-    return datetime.datetime.today()
+    # start on first day of current month
+    now = datetime.datetime.now()
+    first_day = datetime.datetime(now.year, now.month, 1)
+    return first_day
 
 @form.default_value(field=IProject['stop'])
 def stopDate(data):
-    # stop in one year
-    return datetime.datetime.today() + datetime.timedelta(days=365)
+    # stop in one year-ish.
+    now = datetime.datetime.now()
+    last_day = calendar.monthrange(now.year + 1, now.month)[1]
+    return datetime.datetime(now.year + 1, now.month, last_day)
