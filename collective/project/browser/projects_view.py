@@ -5,8 +5,6 @@ import datetime
 
 class ProjectsView(BrowserView):
 
-    #__call__ = ViewPageTemplateFile('projects_view.pt')
-
     # Based on http://code.activestate.com/recipes/52306/
     def sortedDictValues3(self,adict):
         keys = adict.keys()
@@ -50,13 +48,7 @@ class ProjectsView(BrowserView):
             stop = iter.stop
             tasks = iter.objectValues()
             for task in tasks:
-
-#                days = self.total_hours(iter,billable_only=True).days
-#                seconds = days * 86400
-
                 hours = float(self.total_hours(iter,billable_only=True).seconds)/float(3600)
-
-#                hours = float((self.total_hours_billable(iter).seconds + seconds) / 3600)
                 total = hours * rate
 
         if not proj.billable:
@@ -121,14 +113,6 @@ class ProjectsView(BrowserView):
             return self.context.portal_properties.project_properties.iteration
         except:
             return 'Active Projects'
-
-#    def total_hours(self,iter,billable_only=True):
-#        hours = datetime.timedelta(0)
-#        tasks = iter.objectValues()
-#        for task in tasks:
-#            if task.billable:
-#                hours += task.stop - task.start
-#        return hours
 
     def total_hours(self,iter,billable_only=False):
         if billable_only:
