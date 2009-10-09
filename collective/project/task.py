@@ -97,7 +97,10 @@ class View(grok.View):
     def total_income(self):
         hours = float(self.total_hours(billable_only=True).seconds)/float(3600)
         rate = self.getRate()
-        return self.ff(hours * rate)
+        try:
+            return self.ff(hours * rate)
+        except:
+            return self.ff(hours * 0.0)
 
     def getOddEven(self, counter):
         if counter % 2 == 0:
