@@ -25,6 +25,7 @@ setup(name='collective.project',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'plone.app.dexterity',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
