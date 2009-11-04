@@ -67,10 +67,16 @@ class View(grok.View):
     def total_income(self,iter):
         hours = float(self.total_hours(iter,billable_only=True).seconds)/float(3600)
         rate = self.getRate()
-        try:
-            return self.ff(hours * rate)
-        except:
-            return self.ff(hours * 0.0)
+        if not (self.context.flat or iter.flat):
+            try:
+                return self.ff(hours * rate)
+            except:
+                return self.ff(hours * 0.0)
+        else:
+            try:
+                return self.ff(rate)
+            except:
+                return self.ff(0.0)
 
     def project_title(self):
         project = self.context.Title()

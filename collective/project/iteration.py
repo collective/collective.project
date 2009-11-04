@@ -26,6 +26,18 @@ class IIteration(form.Schema):
             required=False,
         )
 
+    flat = schema.Bool(
+            title=_(u"Flat"),
+            required=False,
+            default=False,
+        )
+
+    billable = schema.Bool(
+            title=_(u"Billable"),
+            required=False,
+            default=True,
+        )
+
 class View(grok.View):
     grok.context(IIteration)
     grok.require('zope2.View')
@@ -58,6 +70,7 @@ class View(grok.View):
             hours = datetime.timedelta(0)
             tasks = self.context.objectValues()
             for task in tasks:
+                # Only add up billable hours
                 if task.billable:
                     hours += task.stop - task.start
             return hours
@@ -65,16 +78,23 @@ class View(grok.View):
             hours = datetime.timedelta(0)
             tasks = self.context.objectValues()
             for task in tasks:
+                # Add up everything
                 hours += task.stop - task.start
             return hours
 
     def total_income(self):
         hours = float(self.total_hours(billable_only=True).seconds)/float(3600)
         rate = self.getRate()
-        try:
-            return self.ff(hours * rate)
-        except:
-            return self.ff(hours * 0.0)
+        if not self.context.flat:
+            try:
+                return self.ff(hours * rate)
+            except:
+                return self.ff(hours * 0.0)
+        else:
+            try:
+                return self.ff(rate)
+            except:
+                return self.ff(0.0)
 
     def ff(self,f):
         # format float

@@ -48,9 +48,13 @@ class ProjectsView(BrowserView):
                 start = iter.start
                 stop = iter.stop
                 tasks = iter.objectValues()
-                for task in tasks:
-                    hours = float(self.total_hours(iter,billable_only=True).seconds)/float(3600)
-                    total = hours * rate
+                flat = iter.flat
+                if not flat:
+                    for task in tasks:
+                        hours = float(self.total_hours(iter,billable_only=True).seconds)/float(3600)
+                        total = hours * rate
+                else: 
+                    total = rate
 
         if not proj.billable:
             total = 0.0
