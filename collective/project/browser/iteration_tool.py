@@ -7,6 +7,8 @@ from zope.schema import vocabulary
 from zope.interface import directlyProvides
 from zope.schema.interfaces import IVocabularyFactory
 
+import datetime
+
 projectsField = schema.Choice(
     title=u'Projects',
     description=u'Projects field.',
@@ -14,17 +16,23 @@ projectsField = schema.Choice(
 )
 
 class ConfigureIterationSchema(interface.Interface):
-    iteration = schema.TextLine(title=_(u"Iteration id"), description=_(u"E.g. 'May 2009'"))
+
+    iteration = schema.TextLine(
+        title=_(u"Iteration"), 
+        default=_(unicode(datetime.datetime.today().strftime('%B %Y')))
+        )
+
     projects = schema.Set(
-        title=u'Projects',
-        description=u"Select projects or not, I really don't care at this point",
+        title=u'Project(s)',
         value_type=projectsField,
         )
 
 class ConfigureIterationForm(form.Form):
     fields = field.Fields(ConfigureIterationSchema)
     ignoreContext = True # don't use context to get widget data
-    label = _(u"Create an iteration for the projects selected below")
+    label = _(u"Iteration tool")
+    description = _(u"Create iteration for selected projects")
+
     def configure_iteration(self, action, data):
         if data['iteration']:
             iteration = data['iteration']
@@ -32,17 +40,18 @@ class ConfigureIterationForm(form.Form):
         clients = find_projects()
         for client in clients:
             c = client.getObject()
-            if c.getId() in data['projects']:
+            cid = c.getId()
+            if cid in data['projects']:
                 try:
-                    c.invokeFactory('Iteration',iteration_norm)
+                    c.invokeFactory('iteration',iteration_norm)
                 except:
-                    print "Cannot create iteration %s for client %s." % (iteration, c)
+                    print "Cannot create iteration %s for client %s." % (iteration, cid)
                 try:
                     new_iteration = c[iteration_norm]
                     new_iteration.setTitle(iteration)
                     new_iteration.reindexObject()
                 except:
-                    print "Cannot create iteration %s." % (iteration)
+                    print "Cannot create iteration %s for client %s." % (iteration, cid)
 
     @button.buttonAndHandler(u'Submit')
     def handleApply(self, action):
