@@ -40,5 +40,5 @@ setup(name='collective.project',
       [egg_info.writers]
       paster_plugins.txt = setuptools.command.egg_info:write_arg
       """,
-      paster_plugins = ["ZopeSkel"],
+#      paster_plugins = ["ZopeSkel"],
       )
