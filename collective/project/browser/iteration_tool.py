@@ -55,7 +55,7 @@ class ConfigureIterationForm(form.Form):
                 except:
                     print "Cannot create iteration %s for project %s." % (iteration, proj)
                 try:
-                    new_iteration = c[iteration_norm]
+                    new_iteration = proj[iteration_norm]
                     new_iteration.setTitle(iteration)
                     new_iteration.reindexObject()
                 except:
