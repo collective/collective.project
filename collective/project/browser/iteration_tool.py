@@ -37,21 +37,21 @@ class ConfigureIterationForm(form.Form):
         if data['iteration']:
             iteration = data['iteration']
             iteration_norm = iteration.lower().replace(' ','-')
-        clients = find_projects()
-        for client in clients:
-            c = client.getObject()
-            cid = c.getId()
+        projects = find_projects()
+        for project in projects:
+            c = project.getObject()
+            cid = c.absolute_url()
             if cid in data['projects']:
                 try:
                     c.invokeFactory('iteration',iteration_norm)
                 except:
-                    print "Cannot create iteration %s for client %s." % (iteration, cid)
+                    print "Cannot create iteration %s for project %s." % (iteration, cid)
                 try:
                     new_iteration = c[iteration_norm]
                     new_iteration.setTitle(iteration)
                     new_iteration.reindexObject()
                 except:
-                    print "Cannot create iteration %s for client %s." % (iteration, cid)
+                    print "Cannot create iteration %s for project %s." % (iteration, cid)
 
     @button.buttonAndHandler(u'Submit')
     def handleApply(self, action):
@@ -61,11 +61,15 @@ class ConfigureIterationForm(form.Form):
         else:
             self.configure_iteration(action, data)
 
-def projectsVocab(context):
+def projectsDict():
     projects = {}
     for p in find_projects():
         obj = p.getObject()
-        projects[obj.getId()] = obj.getId()
+        projects[obj.absolute_url()] = obj
+    return projects
+
+def projectsVocab(context):
+    projects = projectsDict()
     items = projects.items()
     return vocabulary.SimpleVocabulary.fromItems(items)
 
