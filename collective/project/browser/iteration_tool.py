@@ -15,6 +15,14 @@ projectsField = schema.Choice(
     vocabulary='projects_vocab'
 )
 
+def breadcrumbs(context,project):
+    results = []
+    path = list(project.getObject().getPhysicalPath())[2:]
+    for i in range(len(path)):
+        results.append(context.restrictedTraverse('/'.join(path)).Title())
+        path.pop()
+    return ' > '.join(results)
+
 class ConfigureIterationSchema(interface.Interface):
 
     iteration = schema.TextLine(
@@ -61,15 +69,16 @@ class ConfigureIterationForm(form.Form):
         else:
             self.configure_iteration(action, data)
 
-def projectsDict():
+def projectsDict(context):
     projects = {}
     for p in find_projects():
         obj = p.getObject()
-        projects[obj.absolute_url()] = obj
+        bc = breadcrumbs(context,p)
+        projects[bc] = obj
     return projects
 
 def projectsVocab(context):
-    projects = projectsDict()
+    projects = projectsDict(context)
     items = projects.items()
     return vocabulary.SimpleVocabulary.fromItems(items)
 
