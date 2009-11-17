@@ -12,10 +12,10 @@ import datetime
 projectsField = schema.Choice(
     title=u'Projects',
     description=u'Projects field.',
-    vocabulary='projects_vocab'
-)
+    vocabulary='projects_vocab')
 
-def breadcrumbs(context,project):
+
+def breadcrumbs(context, project):
     results = []
     path = list(project.getObject().getPhysicalPath())[2:]
     for i in range(len(path)):
@@ -23,17 +23,18 @@ def breadcrumbs(context,project):
         path.pop()
     return ' > '.join(results)
 
+
 class ConfigureIterationSchema(interface.Interface):
 
     iteration = schema.TextLine(
-        title=_(u"Iteration"), 
-        default=_(unicode(datetime.datetime.today().strftime('%B %Y')))
-        )
+        title=_(u"Iteration"),
+        default=_(unicode(datetime.datetime.today().strftime('%B %Y'))))
 
     projects = schema.Set(
         title=u'Project(s)',
         value_type=projectsField,
         )
+
 
 class ConfigureIterationForm(form.Form):
     fields = field.Fields(ConfigureIterationSchema)
@@ -44,22 +45,21 @@ class ConfigureIterationForm(form.Form):
     def configure_iteration(self, action, data):
         if data['iteration']:
             iteration = data['iteration']
-            iteration_norm = iteration.lower().replace(' ','-')
+            iteration_norm = iteration.lower().replace(' ', '-')
         projects = find_projects()
         for project in projects:
-            c = project.getObject()
-            cid = c.absolute_url()
-            if cid in data['projects']:
+            proj = project.getObject()
+            if proj in data['projects']:
                 try:
-                    c.invokeFactory('iteration',iteration_norm)
+                    c.invokeFactory('iteration', iteration_norm)
                 except:
-                    print "Cannot create iteration %s for project %s." % (iteration, cid)
+                    print "Cannot create iteration %s for project %s." % (iteration, proj)
                 try:
                     new_iteration = c[iteration_norm]
                     new_iteration.setTitle(iteration)
                     new_iteration.reindexObject()
                 except:
-                    print "Cannot create iteration %s for project %s." % (iteration, cid)
+                    print "Cannot create iteration %s for project %s." % (iteration, proj)
 
     @button.buttonAndHandler(u'Submit')
     def handleApply(self, action):
