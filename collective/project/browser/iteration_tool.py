@@ -53,13 +53,13 @@ class ConfigureIterationForm(form.Form):
                 try:
                     proj.invokeFactory('iteration', iteration_norm)
                 except:
-                    print "Cannot create iteration %s for project %s." % (iteration, proj)
+                    print "Cannot create iteration %s for project %s." % (iteration, proj.absolute_url())
                 try:
                     new_iteration = proj[iteration_norm]
                     new_iteration.setTitle(iteration)
                     new_iteration.reindexObject()
                 except:
-                    print "Cannot create iteration %s for project %s." % (iteration, proj)
+                    print "Cannot create iteration %s for project %s." % (iteration, proj.absolute_url())
 
     @button.buttonAndHandler(u'Submit')
     def handleApply(self, action):
