@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.9 - Nov 17, 2009
+------------------
+
+* Restore 'iteration tool'.
+    - Provide ability to batch create iterations for selected
+      projects, e.g. November 2009.
+    - Uses z3cform.
+
 0.8 - Oct 8, 2009
 -----------------
 
