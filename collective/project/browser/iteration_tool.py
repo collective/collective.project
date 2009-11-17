@@ -51,7 +51,7 @@ class ConfigureIterationForm(form.Form):
             proj = project.getObject()
             if proj in data['projects']:
                 try:
-                    c.invokeFactory('iteration', iteration_norm)
+                    proj.invokeFactory('iteration', iteration_norm)
                 except:
                     print "Cannot create iteration %s for project %s." % (iteration, proj)
                 try:
