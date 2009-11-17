@@ -79,7 +79,7 @@ def projectsDict(context):
 
 def projectsVocab(context):
     projects = projectsDict(context)
-    items = projects.items()
+    items = sorted(projects.items())
     return vocabulary.SimpleVocabulary.fromItems(items)
 
 def find_projects():
