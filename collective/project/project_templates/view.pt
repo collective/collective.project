@@ -1,8 +1,11 @@
 <html>
 <body metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="top_slot"
-             tal:define="dummy python:request.set('disable_border',1)" />
+<metal:block fill-slot="top_slot">
+    <tal:disable_border tal:condition="view/disable_border">
+        <tal:dummy tal:define="dummy python:request.set('disable_border',1)" />
+    </tal:disable_border>
+</metal:block>
 
 <head>
     <metal:css fill-slot="css_slot">

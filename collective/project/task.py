@@ -124,6 +124,8 @@ class View(grok.View):
     def getHours(self):
         return str(self.context.stop - self.context.start)
 
+    def disable_border(self):
+        return self.context.portal_properties.project_properties.disable_border
 
 @form.default_value(field=ITask['start'])
 def startDate(data):

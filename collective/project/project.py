@@ -140,6 +140,9 @@ class View(grok.View):
         else:
             return False
 
+    def disable_border(self):
+        return self.context.portal_properties.project_properties.disable_border
+
 @form.default_value(field=IProject['start'])
 def startDate(data):
     # start on first day of current month

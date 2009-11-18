@@ -3,5 +3,6 @@
  <object name="project_properties" meta_type="Plone Property Sheet">
   <property name="title">collective.project Property Sheet</property>
   <property name="iteration" type="string">Active Projects</property>
+  <property name="disable_border" type="boolean">True</property>
  </object>
 </object>
