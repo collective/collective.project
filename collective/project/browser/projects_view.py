@@ -75,7 +75,8 @@ class ProjectsView(BrowserView):
 
     def format_date(self,d):
         try:
-            d = d.strftime('%Y-%m-%d')
+            #d = d.strftime('%Y-%m-%d')
+            d = d.strftime('%Y-%m')
             return d
         except:
             return None
