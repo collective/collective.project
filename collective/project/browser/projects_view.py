@@ -151,3 +151,6 @@ class ProjectsView(BrowserView):
             return True
         else:
             return False
+
+    def disable_border(self):
+        return self.context.portal_properties.project_properties.disable_border

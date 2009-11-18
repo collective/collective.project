@@ -1,6 +1,7 @@
 
 [ ] Rip out format float function and move to a common.py
     This applies to any other duplicate code, as well. ;-)
+    - grok.baseclass
 
 [ ] Need to deactive old iterations when creating new iterations
     with iteration tool.
