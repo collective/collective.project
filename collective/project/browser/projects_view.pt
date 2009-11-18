@@ -38,7 +38,7 @@
 
     <tal:projects tal:repeat="project projects">
         <tr tal:attributes="class python: view.getOddEven(c)" 
-            tal:define="project_data python: view.project_totals(project);
+            tal:define="project_totals python: view.project_totals(project);
                         global c python: c + 1">
 
             <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
@@ -47,20 +47,20 @@
 
             <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
                 tal:attributes="href python: view.project_edit(project)"><span class="project-breadcrumbs"
-                    tal:content="python: project_data[2]"></span></a></span></td>
+                    tal:content="python: project_totals[2]"></span></a></span></td>
 
-            <td class="align-right"><span tal:content="python: project_data[1]" /></td>
-
-            <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
-                tal:attributes="href python: view.project_edit(project)"><span class="project-breadcrumbs"
-                    tal:content="python: project_data[3]"></span></a></span></td>
+            <td class="align-right"><span tal:content="python: project_totals[1]" /></td>
 
             <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
                 tal:attributes="href python: view.project_edit(project)"><span class="project-breadcrumbs"
-                    tal:content="python: project_data[4]"></span></a></span></td>
+                    tal:content="python: project_totals[3]"></span></a></span></td>
+
+            <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
+                tal:attributes="href python: view.project_edit(project)"><span class="project-breadcrumbs"
+                    tal:content="python: project_totals[4]"></span></a></span></td>
 
 
-            <td class="align-right"><span tal:content="python: project_data[5]" /></td>
+            <td class="align-right"><span tal:content="python: project_totals[5]" /></td>
         </tr>
     </tal:projects>
 
