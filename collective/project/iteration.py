@@ -97,7 +97,6 @@ class View(grok.View):
                 return self.format_float(0.0)
 
     def format_float(self,f):
-        # format float
         try:
             f = '%.2f' % f
             return f

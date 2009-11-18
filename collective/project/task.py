@@ -68,7 +68,6 @@ class View(grok.View):
         return hours
 
     def format_float(self, f):
-        # format float
         try:
             f = '%.2f' % f
             return f

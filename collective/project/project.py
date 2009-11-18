@@ -92,7 +92,6 @@ class View(grok.View):
         return ' &rarr; '.join(results)
 
     def format_float(self,f):
-        # format float
         try:
             f = '%.2f' % f
             return f
