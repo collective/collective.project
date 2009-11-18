@@ -69,14 +69,14 @@ class View(grok.View):
         rate = self.getRate()
         if not (self.context.flat or iter.flat):
             try:
-                return self.ff(hours * rate)
+                return self.format_float(hours * rate)
             except:
-                return self.ff(hours * 0.0)
+                return self.format_float(hours * 0.0)
         else:
             try:
-                return self.ff(rate)
+                return self.format_float(rate)
             except:
-                return self.ff(0.0)
+                return self.format_float(0.0)
 
     def project_title(self):
         project = self.context.Title()
@@ -91,7 +91,7 @@ class View(grok.View):
         results.reverse()
         return ' &rarr; '.join(results)
 
-    def ff(self,f):
+    def format_float(self,f):
         # format float
         try:
             f = '%.2f' % f

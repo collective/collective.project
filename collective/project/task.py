@@ -67,7 +67,7 @@ class View(grok.View):
         hours = task.stop - task.start
         return hours
 
-    def ff(self, f):
+    def format_float(self, f):
         # format float
         try:
             f = '%.2f' % f
@@ -98,9 +98,9 @@ class View(grok.View):
         hours = float(self.total_hours(billable_only=True).seconds)/float(3600)
         rate = self.getRate()
         try:
-            return self.ff(hours * rate)
+            return self.format_float(hours * rate)
         except:
-            return self.ff(hours * 0.0)
+            return self.format_float(hours * 0.0)
 
     def getOddEven(self, counter):
         if counter % 2 == 0:
