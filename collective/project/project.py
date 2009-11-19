@@ -4,12 +4,29 @@ from plone.directives import form
 from collective.project import projectMessageFactory as _
 import datetime
 import calendar
+from zope.schema.interfaces import IContextSourceBinder
+from zope.schema.vocabulary import SimpleVocabulary
+from Products.CMFCore.utils import getToolByName
+
+@grok.provider(IContextSourceBinder)
+def projectTypes(context):
+    terms = []
+    pprop = getToolByName(context, 'portal_properties')
+    for t in pprop.project_properties.project_types:
+        terms.append(SimpleVocabulary.createTerm(t, str(t), t))
+    return SimpleVocabulary(terms)
 
 class IProject(form.Schema):
 
-    title = schema.TextLine(
+#    title = schema.TextLine(
+#            title=_(u"Title"),
+#            default=_(u"Consulting"),
+#        )
+
+    title = schema.Choice(
             title=_(u"Title"),
-            default=_(u"Consulting"),
+            source=projectTypes,
+            required=True,
         )
 
     summary = schema.Text(
@@ -154,3 +171,4 @@ def stopDate(data):
     # stop in one year-ish.
     now = datetime.datetime.now()
     return datetime.datetime(now.year + 1, now.month, 1) - datetime.timedelta(1)
+
