@@ -52,7 +52,10 @@ class ProjectsView(BrowserView):
                 if not flat:
                     for task in tasks:
                         hours = float(self.total_hours(iter,billable_only=True).seconds)/float(3600)
-                        total = hours * rate
+                        try:
+                            total = hours * rate
+                        except:
+                            total = 0
                 else: 
                     total = rate
 
