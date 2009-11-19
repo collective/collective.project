@@ -2,7 +2,7 @@ Changelog
 =========
 
 0.9.1 - Nov 19, 2009
-------------------
+--------------------
 
 * Iteration tool bug fixes [aclark]
     - Set date on new iterations
@@ -17,16 +17,16 @@ Changelog
 * Add portal property to make disable border configurable
   on all types. [aclark]
 
-0.9 - Nov 17, 2009
-------------------
+0.9.0 - Nov 17, 2009
+--------------------
 
 * Restore 'iteration tool'. [aclark]
     - Provide ability to batch create iterations for selected
       projects, e.g. November 2009.
     - Uses z3cform.
 
-0.8 - Oct 8, 2009
------------------
+0.8.0 - Oct 8, 2009
+-------------------
 
 * Bug fixes: [aclark]
     - Fix hours calculation for increments of time < 1 hour.
@@ -38,15 +38,15 @@ Changelog
     - Start and stop project on first day day of current month and last day of
       current month plus one year.
 
-0.7 - Sep 29, 2009
-------------------
+0.7.0 - Sep 29, 2009
+--------------------
 
 * Package and bug fixes [aclark]
     - Package shipped without top level docs directory, fixed.
     - projects_view was broken in several ways, fixed.
 
-0.6 - Sep 25, 2009
-------------------
+0.6.0 - Sep 25, 2009
+--------------------
 
 * Rename package to 'collective.project'. [aclark]
 * Final Dexterity content types implementation: [aclark]
@@ -59,41 +59,40 @@ Changelog
     - Task
         - Has start(datetime), stop(datetime), billable(boolean) fields.
 
-* Provides custom view templates for Project, Iteration, and Task as well as a
-  three top level views: [aclark]
-        - projects_view
-            - Consulting -> Client A.
-        - clients_view
-            - Client A -> Consulting.
-        - print_view
-            - Format for print.
+* Provides custom view templates for Project, Iteration, and Task as well as three top level views: [aclark]
+    - projects_view
+        - Consulting -> Client A.
+    - clients_view
+        - Client A -> Consulting.
+    - print_view
+        - Format for print.
 
-0.5 - Aug 16, 2009
-------------------
+0.5.0 - Aug 16, 2009
+--------------------
 
 * Initial Dexterity content types implementation. [aclark]
 
-0.4 - Aug 14, 2009
-------------------
+0.4.0 - Aug 14, 2009
+--------------------
 
-* Track variable and flat rate fee projects (e.g. consulting and hosting).
-    - Amortize flat rate fee over number of months. [aclark]
+* Track variable and flat rate fee projects (e.g. consulting and hosting). [aclark]
+    - Amortize flat rate fee over number of months.
 
 * Compute totals for active projects only. [aclark]
 
-0.3 - Mar 19, 2009
-------------------
+0.3.0 - Mar 19, 2009
+--------------------
 
 * Bug fix in iteration_view template. [aclark]
 
-0.2 - Mar 19, 2009
-------------------
+0.2.0 - Mar 19, 2009
+--------------------
 
 * Add billable field to task
 * Add sort_on = 'getObjPositionInParent' to projects_view to display projects
   in order. [aclark]
 
-0.1 - Mar 15, 2009
-------------------
+0.1.0 - Mar 15, 2009
+--------------------
 
 * Initial release. [aclark]
