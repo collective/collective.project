@@ -64,8 +64,8 @@ class ProjectsView(BrowserView):
         
         format_float = self.format_float
         hours, rate, total = format_float(hours), format_float(rate), format_float(total)
-        fd = self.format_date
-        start, stop = fd(start), fd(stop)
+        format_date = self.format_date
+        start, stop = format_date(start), format_date(stop)
         return ([title, hours, rate, start, stop, total])
 
     def format_float(self,f):
