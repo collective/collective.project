@@ -153,5 +153,4 @@ def startDate(data):
 def stopDate(data):
     # stop in one year-ish.
     now = datetime.datetime.now()
-    last_day = calendar.monthrange(now.year + 1, now.month)[1]
-    return datetime.datetime(now.year + 1, now.month, last_day)
+    return datetime.datetime(now.year + 1, now.month, 1) - datetime.timedelta(1)
