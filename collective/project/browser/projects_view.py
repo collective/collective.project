@@ -62,13 +62,13 @@ class ProjectsView(BrowserView):
         if not proj.billable:
             total = 0.0
         
-        ff = self.ff
-        hours, rate, total = ff(hours), ff(rate), ff(total)
+        format_float = self.format_float
+        hours, rate, total = format_float(hours), format_float(rate), format_float(total)
         fd = self.format_date
         start, stop = fd(start), fd(stop)
         return ([title, hours, rate, start, stop, total])
 
-    def ff(self,f):
+    def format_float(self,f):
         # format float
         try:
             f = '%.2f' % f
