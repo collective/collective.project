@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.9'
+version = open(os.path.join("collective", "project", "version.txt")).read().strip()
 
 setup(name='collective.project',
       version=version,
