@@ -64,7 +64,7 @@ class ConfigureIterationForm(form.Form):
                 except:
                     print "Cannot create iteration %s for project %s." % (iteration, proj.absolute_url())
 
-    @button.buttonAndHandler(u'Submit')
+    @button.buttonAndHandler(u'Create')
     def handleApply(self, action):
         data, errors = self.extractData()
         if errors:
