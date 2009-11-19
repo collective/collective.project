@@ -8,6 +8,7 @@ from zope.interface import directlyProvides
 from zope.schema.interfaces import IVocabularyFactory
 
 import datetime
+import calendar
 
 projectsField = schema.Choice(
     title=u'Projects',
@@ -45,19 +46,21 @@ class ConfigureIterationForm(form.Form):
     def configure_iteration(self, action, data):
         if data['iteration']:
             iteration = data['iteration']
-            iteration_norm = iteration.lower().replace(' ', '-')
+            iter_id = iteration.lower().replace(' ', '-')
         projects = find_projects()
         for project in projects:
             proj = project.getObject()
             if proj in data['projects']:
                 try:
-                    proj.invokeFactory('iteration', iteration_norm)
+                    proj.invokeFactory('iteration', iter_id)
                 except:
                     print "Cannot create iteration %s for project %s." % (iteration, proj.absolute_url())
                 try:
-                    new_iteration = proj[iteration_norm]
-                    new_iteration.setTitle(iteration)
-                    new_iteration.reindexObject()
+                    iter_new = proj[iter_id]
+                    iter_new.setTitle(iteration)
+                    iter_new.start = startDate()
+                    iter_new.stop = stopDate()
+                    iter_new.reindexObject()
                 except:
                     print "Cannot create iteration %s for project %s." % (iteration, proj.absolute_url())
 
@@ -85,6 +88,18 @@ def projectsVocab(context):
 def find_projects():
     site = getSite()
     return site.portal_catalog(portal_type='project')
+
+def startDate():
+    # start on first day of current month
+    now = datetime.datetime.now()
+    first_day = datetime.datetime(now.year, now.month, 1)
+    return first_day
+
+def stopDate():
+    # stop in one month
+    now = datetime.datetime.now()
+    last_day = calendar.monthrange(now.year, now.month)[1]
+    return datetime.datetime(now.year, now.month, last_day)
 
 directlyProvides(projectsVocab, IVocabularyFactory)
 ConfigureIteration = wrap_form(ConfigureIterationForm)
