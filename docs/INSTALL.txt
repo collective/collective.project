@@ -1,52 +1,50 @@
-collective.project Installation
--------------------------------
+Installation
+============
 
-To install collective.project into the global Python environment (or a workingenv),
-using a traditional Zope 2 instance, you can do this:
+To install collective.project using zc.buildout, you can do this:
 
-* When you're reading this you have probably already run 
-  ``easy_install collective.project``. Find out how to install setuptools
-  (and EasyInstall) here:
-  http://peak.telecommunity.com/DevCenter/EasyInstall
+* Add ``collective.dexterity`` to the list of instance eggs, e.g.::
 
-* If you are using Zope 2.9 (not 2.10), get `pythonproducts`_ and install it 
-  via::
+    [instance]
+    ...
+    eggs = 
+        ...
+        collective.project
 
-    python setup.py install --home /path/to/instance
-
-into your Zope instance.
-
-* Create a file called ``collective.project-configure.zcml`` in the
-  ``/path/to/instance/etc/package-includes`` directory.  The file
-  should only contain this::
-
-    <include package="collective.project" />
-
-.. _pythonproducts: http://plone.org/products/pythonproducts
-
-
-Alternatively, if you are using zc.buildout and the plone.recipe.zope2instance
-recipe to manage your project, you can do this:
-
-* Add ``collective.project`` to the list of eggs to install, e.g.:
+* Add ``http://good-py.appspot.com/release/dexterity/1.0a2`` to the list of
+  buildout extends, e.g.::
 
     [buildout]
+    ...
+    extends =
+        ...
+        http://good-py.appspot.com/release/dexterity/1.0a2
+
+  For more information about how to install Dexterity, please see:
+  http://plone.org/products/dexterity/documentation/how-to/install.
+       
+* Add ``collective.project`` to the list of instance eggs, e.g.::
+
+    [instance]
     ...
     eggs =
         ...
         collective.project
-       
-* Tell the plone.recipe.zope2instance recipe to install a ZCML slug:
+
+* For Plone 3.2.x and under, tell the plone.recipe.zope2instance recipe to install a 
+  ZCML slug::
 
     [instance]
     recipe = plone.recipe.zope2instance
     ...
     zcml =
         collective.project
-      
-* Re-run buildout, e.g. with:
+
+* Re-run buildout, e.g. with::
 
     $ ./bin/buildout
         
 You can skip the ZCML slug if you are going to explicitly include the package
-from another package's configure.zcml file.
+from another package's configure.zcml file, or if you are using Plone 3.3.x or
+higher.
+
