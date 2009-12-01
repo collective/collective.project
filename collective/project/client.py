@@ -10,9 +10,9 @@ from Products.CMFCore.utils import getToolByName
 
 class IClient(form.Schema):
 
-    name = schema.Choice(
+    name = schema.Text(
             title=_(u"Name"),
-            source=projectTypes,
+            description=_(u"First Last."),
             required=True,
         )
 
