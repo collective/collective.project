@@ -18,11 +18,6 @@ def projectTypes(context):
 
 class IProject(form.Schema):
 
-#    title = schema.TextLine(
-#            title=_(u"Title"),
-#            default=_(u"Consulting"),
-#        )
-
     title = schema.Choice(
             title=_(u"Title"),
             source=projectTypes,
