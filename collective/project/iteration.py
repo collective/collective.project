@@ -83,7 +83,11 @@ class View(grok.View):
             return hours
 
     def total_income(self):
-        hours = float(self.total_hours(billable_only=True).seconds)/float(3600)
+        days = self.total_hours(billable_only=True).days
+        if not days >= 1:
+            hours = float(self.total_hours(billable_only=True).seconds)/float(3600)
+        else:
+            hours = (float(self.total_hours(billable_only=True).seconds)/float(3600)) + float(days * 24)
         rate = self.getRate()
         if not self.context.flat:
             try:
