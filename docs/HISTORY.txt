@@ -9,6 +9,8 @@ Changelog
 * Add a class method to change workflow state on all active iterations (to
   inactive) when creating new iterations
 
+* Rename iteration_tool to create_iteration
+
 0.9.2 - Nov 30, 2009
 --------------------
 
