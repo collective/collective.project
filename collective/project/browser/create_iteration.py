@@ -43,34 +43,38 @@ class CreateIterationForm(form.Form):
     label = _(u"Iteration tool")
     description = _(u"Create iteration for selected projects")
 
-    def deactivate_iteration(self):
+    def deactivate_iteration(self, action, data):
         wftool = self.context.portal_workflow
         iterations = find_iterations()
         for iteration in iterations:
+            if data['iteration']:
+                data_iter = data['iteration']
+                new_iter = data_iter.lower().replace(' ', '-')
             iter = iteration.getObject()
-            if wftool.getInfoFor(iter, 'review_state') == 'active':
-                iter.content_status_modify(workflow_action='deactivate')
+            if not unicode(iter.id) == new_iter: # Don't deactive the current iter
+                if wftool.getInfoFor(iter, 'review_state') == 'active':
+                    wftool.doActionFor(iter,'deactivate')
 
-    def configure_iteration(self, action, data):
+    def create_iteration(self, action, data):
         if data['iteration']:
-            iteration = data['iteration']
-            iter_id = iteration.lower().replace(' ', '-')
+            data_iter = data['iteration']
+            new_iter = data_iter.lower().replace(' ', '-')
         projects = find_projects()
         for project in projects:
             proj = project.getObject()
             if proj in data['projects']:
                 try:
-                    proj.invokeFactory('iteration', iter_id)
+                    proj.invokeFactory('iteration', new_iter)
                 except:
-                    print "Cannot create iteration %s for project %s." % (iteration, proj.absolute_url())
+                    print "Cannot create iteration %s for project %s." % (new_iter, proj.absolute_url())
                 try:
-                    iter_new = proj[iter_id]
-                    iter_new.setTitle(iteration)
+                    iter_new = proj[new_iter]
+                    iter_new.setTitle(data_iter)
                     iter_new.start = startDate()
                     iter_new.stop = stopDate()
                     iter_new.reindexObject()
                 except:
-                    print "Cannot create iteration %s for project %s." % (iteration, proj.absolute_url())
+                    print "Cannot create iteration %s for project %s." % (new_iter, proj.absolute_url())
 
     @button.buttonAndHandler(u'Create')
     def handleApply(self, action):
@@ -78,8 +82,8 @@ class CreateIterationForm(form.Form):
         if errors:
             self.status = form.EditForm.formErrorsMessage
         else:
-            self.deactivate_iteration()
-            self.configure_iteration(action, data)
+            self.create_iteration(action, data)
+            self.deactivate_iteration(action, data)
 
 def projectsDict(context):
     projects = {}
