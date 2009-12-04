@@ -43,6 +43,14 @@ class ConfigureIterationForm(form.Form):
     label = _(u"Iteration tool")
     description = _(u"Create iteration for selected projects")
 
+    def deactivate_iteration(self):
+        wftool = self.context.portal_workflow
+        iterations = find_iterations()
+        for iteration in iterations:
+            iter = iteration.getObject()
+            if wftool.getInfoFor(iter, 'review_state') == 'active':
+                iter.content_status_modify(workflow_action='deactivate')
+
     def configure_iteration(self, action, data):
         if data['iteration']:
             iteration = data['iteration']
@@ -70,6 +78,7 @@ class ConfigureIterationForm(form.Form):
         if errors:
             self.status = form.EditForm.formErrorsMessage
         else:
+            self.deactivate_iteration()
             self.configure_iteration(action, data)
 
 def projectsDict(context):
@@ -84,6 +93,10 @@ def projectsVocab(context):
     projects = projectsDict(context)
     items = sorted(projects.items())
     return vocabulary.SimpleVocabulary.fromItems(items)
+
+def find_iterations():
+    site = getSite()
+    return site.portal_catalog(portal_type='iteration')
 
 def find_projects():
     site = getSite()
