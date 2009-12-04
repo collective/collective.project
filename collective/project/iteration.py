@@ -112,6 +112,9 @@ class View(grok.View):
         else:
             return 'odd'
 
+    def getSummary(self,task):
+        return task.summary
+
     def getStartDate(self,task):
         return self.format_date(task.start)
 

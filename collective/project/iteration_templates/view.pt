@@ -33,6 +33,7 @@
         <thead>
             <tr>
                 <th class="bold">Task</th>
+                <th class="bold">Description</th>
                 <th class="bold">Start</th>
                 <th class="bold">Stop</th>
                 <th class="bold">Hours</th>
@@ -44,6 +45,7 @@
                 <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
                     tal:attributes="href task/absolute_url"><span tal:content="task/Title" /></a>
                 </td>
+                <td tal:content="python: view.getSummary(task)"></td>
                 <td tal:content="python: view.getStartDate(task)"></td>
                 <td tal:content="python: view.getStopDate(task)"></td>
                 <td class="align-right">
