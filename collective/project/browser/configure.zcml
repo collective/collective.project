@@ -36,13 +36,13 @@
 
   <browser:page
       for="Products.CMFPlone.Portal.PloneSite"
-      name="iteration_tool"
-      class=".iteration_tool.ConfigureIteration"
+      name="create_iteration"
+      class=".create_iteration.CreateIteration"
       permission="cmf.ManagePortal"
   />
 
   <utility
-      component=".iteration_tool.projectsVocab"
+      component=".create_iterations.projectsVocab"
       name="projects_vocab"
   />
 

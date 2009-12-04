@@ -25,7 +25,7 @@ def breadcrumbs(context, project):
     return ' > '.join(results)
 
 
-class ConfigureIterationSchema(interface.Interface):
+class CreateIterationSchema(interface.Interface):
 
     iteration = schema.TextLine(
         title=_(u"Iteration"),
@@ -37,8 +37,8 @@ class ConfigureIterationSchema(interface.Interface):
         )
 
 
-class ConfigureIterationForm(form.Form):
-    fields = field.Fields(ConfigureIterationSchema)
+class CreateIterationForm(form.Form):
+    fields = field.Fields(CreateIterationSchema)
     ignoreContext = True # don't use context to get widget data
     label = _(u"Iteration tool")
     description = _(u"Create iteration for selected projects")
@@ -115,4 +115,4 @@ def stopDate():
     return datetime.datetime(now.year, now.month, last_day)
 
 directlyProvides(projectsVocab, IVocabularyFactory)
-ConfigureIteration = wrap_form(ConfigureIterationForm)
+CreateIteration = wrap_form(CreateIterationForm)
