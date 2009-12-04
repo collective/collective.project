@@ -42,7 +42,7 @@
   />
 
   <utility
-      component=".create_iterations.projectsVocab"
+      component=".create_iteration.projectsVocab"
       name="projects_vocab"
   />
 
