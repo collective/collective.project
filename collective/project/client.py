@@ -25,6 +25,11 @@ class IClient(form.Schema):
             required=False,
         ) 
 
+    website = schema.TextLine(
+            title=_(u"Website"),
+            required=False,
+        ) 
+
     description = schema.Text(
             title=_(u"Notes"),
             required=False,
