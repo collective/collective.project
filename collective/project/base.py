@@ -1,12 +1,5 @@
-from five import grok
-from plone.directives import form
 
-class IBase(form.Schema):
-    pass
-
-class View(grok.view):
-    grok.context(grok.View)
-    grok.require('zope2.View')
+class View(object):
 
     def disable_border(self):
         return self.context.portal_properties.project_properties.disable_border
@@ -23,3 +16,4 @@ class View(grok.view):
             return 'even'
         else:
             return 'odd'
+

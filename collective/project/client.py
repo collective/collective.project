@@ -36,6 +36,6 @@ class IClient(form.Schema):
             required=False,
         )
 
-class View(grok.view):
-    grok.context(base.View)
+class View(base.View, grok.View):
+    grok.context(grok.View)
     grok.require('zope2.View')
