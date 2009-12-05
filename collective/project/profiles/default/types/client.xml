@@ -2,7 +2,7 @@
 <object name="project" meta_type="Dexterity FTI"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title">Client</property>
- <property name="description">None</property>
+ <property name="description"></property>
  <property name="content_icon"></property>
  <property name="factory">project</property>
  <property name="immediate_view">view</property>
@@ -22,7 +22,6 @@
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">plone.dexterity.content.Container</property>
  <property name="behaviors">
-  <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
   <element value="plone.app.content.interfaces.INameFromTitle"/>
  </property>
  <property name="schema">collective.project.client.IClient</property>

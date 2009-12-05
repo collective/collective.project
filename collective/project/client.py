@@ -10,8 +10,13 @@ from Products.CMFCore.utils import getToolByName
 
 class IClient(form.Schema):
 
-    name = schema.TextLine(
+    title = schema.TextLine(
             title=_(u"Name"),
+            required=True,
+        )
+
+    description = schema.Text(
+            title=_(u"Description"),
             required=False,
         )
 
