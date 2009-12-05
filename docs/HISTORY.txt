@@ -1,20 +1,25 @@
 Changelog
 =========
 
-0.9.3 - Unreleased
---------------------
+0.9.3 - Dec 4, 2009
+-------------------
 
-* Fix bug with calculation of hours when exactly a full day has been worked.
+* Fix bug with calculation of hours when exactly a full day (24 hours) has 
+  been worked. [aclark]
 
-* Add a class method to change workflow state on all active iterations (to
-  inactive) when creating new iterations
+* Rename class method iteration_tool (in CreateIterationForm) to 
+  create_iteration. [aclark]
 
-* Rename iteration_tool to create_iteration
+* Add class method to CreateIterationForm (deactivate_iteration) to change 
+  workflow state on all active iterations (to inactive) when creating new 
+  iterations. [aclark]
+
+* UI enhancements to project, iteration, task templates. [aclark]
 
 0.9.2 - Nov 30, 2009
 --------------------
 
-* Provide installation instructions [aclark]
+* Provide improved installation instructions in docs/INSTALL.txt. [aclark]
 
 0.9.1 - Nov 19, 2009
 --------------------
