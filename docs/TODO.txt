@@ -5,6 +5,5 @@ TODO
 [ ] Create a project base class to share common class methods
     (possibly via grok.baseclass).
 
-[ ] Deactive old iterations when creating new iterations
-    (with iteration tool).
+[X] Deactive old iterations when creating new iterations. 
 
