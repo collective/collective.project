@@ -16,8 +16,6 @@
 
 <div metal:fill-slot="main">
 
-    <h1>XXX Need to create base class for shared class methods, then use them here.</h1>
-
 <tal:comment replace="nothing">
 
     <h1 tal:content="structure python: view.getIterTitle(view.context)">Client → Project</h1>

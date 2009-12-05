@@ -10,22 +10,20 @@ from Products.CMFCore.utils import getToolByName
 
 class IClient(form.Schema):
 
-    name = schema.Text(
+    name = schema.TextLine(
             title=_(u"Name"),
-            description=_(u"First Last."),
-            required=True,
-        )
-
-    summary = schema.Text(
-            title=_(u"Summary"),
-            description=_(u"A short summary of the content."),
             required=False,
         )
 
     email = schema.TextLine(
-            title=_(u"Email address"),
+            title=_(u"Email"),
             required=False,
-        )
+        ) 
+
+    address = schema.TextLine(
+            title=_(u"Address"),
+            required=False,
+        ) 
 
 class View(grok.View):
     grok.context(IClient)
