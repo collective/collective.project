@@ -16,12 +16,10 @@
 
 <div metal:fill-slot="main">
 
-<tal:comment replace="nothing">
-
-    <h1 tal:content="structure python: view.getIterTitle(view.context)">Client → Project</h1>
+    <h1 tal:content="context/title">Client</h1>
 
     <div class="addtask visualNoPrint"> 
-        <a tal:attributes="href string:++add++iteration">Add Iteration</a>
+        <a tal:attributes="href string:++add++project">Add Project</a>
     </div>
 
     <tal:iters tal:repeat="iter python: context.objectValues()">
@@ -74,8 +72,6 @@
         <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
             href="edit">Edit</a></span></div>
     </div>
-
-</tal:comment>
 
 </div>
 

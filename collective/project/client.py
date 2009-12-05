@@ -7,6 +7,7 @@ import calendar
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary
 from Products.CMFCore.utils import getToolByName
+from collective.project import base
 
 class IClient(form.Schema):
 
@@ -35,9 +36,6 @@ class IClient(form.Schema):
             required=False,
         )
 
-class View(grok.View):
-    grok.context(IClient)
+class View(grok.view):
+    grok.context(base.View)
     grok.require('zope2.View')
-
-    def disable_border(self):
-        return self.context.portal_properties.project_properties.disable_border
