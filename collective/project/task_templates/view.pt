@@ -59,8 +59,6 @@
         <div class="align-right" >
             = Total: <span tal:content="view/total_income" />
         </div>
-        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
-            href="folder_contents">Manage contents</a></span></div>
     </div>
 
 
