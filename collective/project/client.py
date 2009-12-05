@@ -15,11 +15,6 @@ class IClient(form.Schema):
             required=True,
         )
 
-    description = schema.Text(
-            title=_(u"Description"),
-            required=False,
-        )
-
     email = schema.TextLine(
             title=_(u"Email"),
             required=False,
@@ -29,6 +24,11 @@ class IClient(form.Schema):
             title=_(u"Address"),
             required=False,
         ) 
+
+    description = schema.Text(
+            title=_(u"Notes"),
+            required=False,
+        )
 
 class View(grok.View):
     grok.context(IClient)
