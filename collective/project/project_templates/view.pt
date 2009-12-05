@@ -68,7 +68,9 @@
         <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
             href="folder_contents">Manage contents</a></span></div>
         <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
-            href="edit">Edit this</a></span></div>
+            href="content_status_history">Workflow</a></span></div>
+        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
+            href="edit">Edit</a></span></div>
     </div>
 
 </div>
