@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9.3 - Dec 4, 2009
+0.9.3 - Dec 5, 2009
 -------------------
 
 * Fix bug with calculation of hours when exactly a full day (24 hours) has 
@@ -15,6 +15,16 @@ Changelog
   iterations. [aclark]
 
 * UI enhancements to project, iteration, task templates. [aclark]
+
+* Factor out some class methods into common.py. [aclark]
+
+* Improved client view template. [aclark]
+
+* Add additional fields to client type. [aclark]
+    - Email
+    - Address
+    - Website
+    - Notes
 
 0.9.2 - Nov 30, 2009
 --------------------
