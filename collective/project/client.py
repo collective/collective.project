@@ -7,7 +7,7 @@ import calendar
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary
 from Products.CMFCore.utils import getToolByName
-from collective.project import base
+from collective.project import common
 
 class IClient(form.Schema):
 
@@ -36,7 +36,7 @@ class IClient(form.Schema):
             required=False,
         )
 
-class View(base.View, grok.View):
+class View(common.View, grok.View):
     grok.context(IClient)
     grok.require('zope2.View')
 
@@ -55,3 +55,4 @@ class View(base.View, grok.View):
         info.reverse()
         info.append('<p><b>%s</b>: %s</p>' % ('Notes', self.context.description))
         return info
+
