@@ -21,7 +21,7 @@ class IClient(form.Schema):
             required=False,
         ) 
 
-    address = schema.TextLine(
+    address = schema.Text(
             title=_(u"Address"),
             required=False,
         ) 
@@ -37,5 +37,21 @@ class IClient(form.Schema):
         )
 
 class View(base.View, grok.View):
-    grok.context(grok.View)
+    grok.context(IClient)
     grok.require('zope2.View')
+
+    def getStartDate(self, project):
+        return self.format_date(project.start)
+
+    def getStopDate(self, project):
+        return self.format_date(project.stop)
+
+    def getInfo(self):
+        info = []
+        # XXX How do I order these fields The Right Way™?
+        for field in IClient.namesAndDescriptions():
+            if not (field[1].title == 'Name' or field[1].title == 'Notes'):
+                info.append('<p><b>%s</b>: %s</p>' % (field[1].title, getattr(self.context, field[0])))
+        info.reverse()
+        info.append('<p><b>%s</b>: %s</p>' % ('Notes', self.context.description))
+        return info

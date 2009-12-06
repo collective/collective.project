@@ -17,3 +17,9 @@ class View(object):
         else:
             return 'odd'
 
+    def format_date(self,d):
+        try:
+            d = d.strftime('%Y-%m-%d')
+            return d
+        except:
+            return None
