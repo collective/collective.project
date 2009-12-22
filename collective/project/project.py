@@ -45,8 +45,9 @@ class IProject(form.Schema):
             required=False,
         )
 
-    budget = schema.Float(
-            title=_(u"Budget"),
+    hours = schema.Float(
+            title=_(u"Hours"),
+            description=_(u"The total number of hours available for this project."),
             required=False,
         )
 
