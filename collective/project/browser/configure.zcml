@@ -15,14 +15,6 @@
 
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="print_view"
-      class=".projects_view.ProjectsView"
-      template="print_view.pt"
-      permission="zope2.View"
-  />
-
-  <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="clients_view"
       class=".projects_view.ProjectsView"
       template="clients_view.pt"
