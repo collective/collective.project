@@ -45,6 +45,11 @@ class IProject(form.Schema):
             required=False,
         )
 
+    budget = schema.Float(
+            title=_(u"Budget"),
+            required=False,
+        )
+
     flat = schema.Bool(
             title=_(u"Flat"),
             required=False,
