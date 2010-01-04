@@ -133,7 +133,10 @@ class View(grok.View):
             return None
 
     def getHours(self,task):
-        return task.stop - task.start
+        if task.stop is not None and task.start is not None:
+            return task.stop - task.start
+        else:
+            return None
 
     def disable_border(self):
         return self.context.portal_properties.project_properties.disable_border
