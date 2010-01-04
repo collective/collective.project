@@ -33,10 +33,10 @@
             </tr>
         </thead>
         <tr> 
-            <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
+            <td valign="top" class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
                 tal:attributes="href python: view.context.absolute_url() + '/edit'"><span tal:content="view/context/Title" /></a>
             </td>
-            <td tal:content="view/context/summary"></td>
+            <td tal:content="structure view/context/summary"></td>
             <td tal:content="python: view.getStartDate()"></td>
             <td tal:content="python: view.getStopDate()"></td>
             <td class="align-right" tal:content="python: view.getHours()"></td>

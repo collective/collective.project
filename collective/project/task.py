@@ -4,10 +4,12 @@ from plone.directives import form
 from collective.project import projectMessageFactory as _
 import datetime
 from BTrees.Length import Length
-
+from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
 
 class ITask(form.Schema):
     form.mode(id='hidden')
+    form.widget(summary=WysiwygFieldWidget)
+
     id = schema.TextLine(
             title=_(u"Id"),
         )
