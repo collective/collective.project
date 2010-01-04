@@ -72,7 +72,8 @@ class View(grok.View):
             for task in tasks:
                 # Only add up billable hours
                 if task.billable:
-                    hours += task.stop - task.start
+                    if task.stop is not None and task.start is not None:
+                        hours += task.stop - task.start
             return hours
         else:
             hours = datetime.timedelta(0)
