@@ -42,13 +42,13 @@
         <tal:tasks tal:repeat="task python: context.objectValues()">
             <tr tal:attributes="class python: view.getOddEven(c)" 
                 tal:define="global c python: c + 1">
-                <td class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
+                <td valign="top" class="navTreeLevel0 visualNoMarker"><span class="navTreeItem"><a href="#" 
                     tal:attributes="href task/absolute_url"><span tal:content="task/Title" /></a>
                 </td>
-                <td tal:content="python: view.getSummary(task)"></td>
-                <td tal:content="python: view.getStartDate(task)"></td>
-                <td tal:content="python: view.getStopDate(task)"></td>
-                <td class="align-right">
+                <td valign="top" tal:content="structure python: view.getSummary(task)"></td>
+                <td valign="top" tal:content="python: view.getStartDate(task)"></td>
+                <td valign="top" tal:content="python: view.getStopDate(task)"></td>
+                <td valign="top" class="align-right">
                     <strike tal:omit-tag="task/billable">
                         <span tal:content="python: view.getHours(task)" />
                     </strike>
