@@ -79,7 +79,8 @@ class View(grok.View):
             hours = datetime.timedelta(0)
             tasks = iter.objectValues()
             for task in tasks:
-                hours += task.stop - task.start
+                if task.stop is not None and task.start is not None:
+                    hours += task.stop - task.start
             return hours
 
     def total_income(self,iter):
