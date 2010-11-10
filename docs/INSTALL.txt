@@ -1,11 +1,11 @@
 Installation
 ============
 
-To install collective.project using zc.buildout, you can do this:
+To install collective.project using ``zc.buildout``, you can do this:
 
-* Add ``collective.dexterity`` to the list of instance eggs, e.g.::
+* Add ``collective.project`` to the list of instance eggs, e.g.::
 
-    [instance]
+    [plone]
     ...
     eggs = 
         ...
@@ -18,33 +18,9 @@ To install collective.project using zc.buildout, you can do this:
     ...
     extends =
         ...
-        http://good-py.appspot.com/release/dexterity/1.0a2
+        http://good-py.appspot.com/release/dexterity/1.0b2
 
-  For more information about how to install Dexterity, please see:
-  http://plone.org/products/dexterity/documentation/how-to/install.
+For more information about how to install Dexterity, please see:
+
+    http://plone.org/products/dexterity/documentation/how-to/install
        
-* Add ``collective.project`` to the list of instance eggs, e.g.::
-
-    [instance]
-    ...
-    eggs =
-        ...
-        collective.project
-
-* For Plone 3.2.x and under, tell the plone.recipe.zope2instance recipe to install a 
-  ZCML slug::
-
-    [instance]
-    recipe = plone.recipe.zope2instance
-    ...
-    zcml =
-        collective.project
-
-* Re-run buildout, e.g. with::
-
-    $ ./bin/buildout
-        
-You can skip the ZCML slug if you are going to explicitly include the package
-from another package's configure.zcml file, or if you are using Plone 3.3.x or
-higher.
-
