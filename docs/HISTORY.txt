@@ -1,129 +1,153 @@
 Changelog
-=========
+*********
 
-0.9.3 - Dec 5, 2009
--------------------
+0.9.4 (11/10/2010)
+~~~~~~~~~~~~~~~~~~
+
+* Clean up
+
+0.9.3 (12/05/2009)
+~~~~~~~~~~~~~~~~~~
 
 * Fix bug with calculation of hours when exactly a full day (24 hours) has 
-  been worked. [aclark]
+  been worked. 
 
 * Rename class method iteration_tool (in CreateIterationForm) to 
-  create_iteration. [aclark]
+  create_iteration. 
 
 * Add class method to CreateIterationForm (deactivate_iteration) to change 
   workflow state on all active iterations (to inactive) when creating new 
-  iterations. [aclark]
+  iterations. 
 
-* UI enhancements to project, iteration, task templates. [aclark]
+* UI enhancements to project, iteration, task templates. 
 
-* Factor out some class methods into common.py. [aclark]
+* Factor out some class methods into common.py. 
 
-* Improved client view template. [aclark]
+* Improved client view template. 
 
-* Add additional fields to client type. [aclark]
-    - Email
-    - Address
-    - Website
-    - Notes
+* Add additional fields to client type:
 
-0.9.2 - Nov 30, 2009
---------------------
+    * Email
+    * Address
+    * Website
+    * Notes
 
-* Provide improved installation instructions in docs/INSTALL.txt. [aclark]
+0.9.2 (11/30/2009)
+~~~~~~~~~~~~~~~~~~
 
-0.9.1 - Nov 19, 2009
---------------------
+* Provide improved installation instructions in docs/INSTALL.txt. 
 
-* Iteration tool bug fixes [aclark]
-    - Set date on new iterations
+0.9.1 (11/19/2009)
+~~~~~~~~~~~~~~~~~~
 
-* Date range tweaks on projects, iterations [aclark]
-    - Projects last 1 year by default
-    - Iterations last 1 month by default
+* Iteration tool bug fixes 
+    * Set date on new iterations
+
+* Date range tweaks on projects, iterations 
+    * Projects last 1 year by default
+    * Iterations last 1 month by default
 
 * Add drop down menu to select Project title, powered by  
-  portal property and SimpleVocabulary. [aclark]
+  portal property and SimpleVocabulary. 
 
 * Add portal property to make disable border configurable
-  on all types. [aclark]
+  on all types. 
 
-0.9.0 - Nov 17, 2009
---------------------
+0.9.0 (11/17/2009)
+~~~~~~~~~~~~~~~~~~
 
-* Restore 'iteration tool'. [aclark]
-    - Provide ability to batch create iterations for selected
+* Restore 'iteration tool': 
+
+    * Provide ability to batch create iterations for selected
       projects, e.g. November 2009.
-    - Uses z3cform.
+    * Uses z3cform.
 
-0.8.0 - Oct 8, 2009
--------------------
+0.8.0 (10/08/2009)
+~~~~~~~~~~~~~~~~~~
 
-* Bug fixes: [aclark]
-    - Fix hours calculation for increments of time < 1 hour.
-    - Calculate totals for active iterations only.
-    - Don't show inactive iterations in iteration_templates/view.pt.
+* Bug fixes: 
 
-* Change defaults for start and stop of projects & iterations. [aclark]
-    - Start and stop iteration on first day and last day of current month.
-    - Start and stop project on first day day of current month and last day of
+    * Fix hours calculation for increments of time < 1 hour.
+    * Calculate totals for active iterations only.
+    * Don't show inactive iterations in iteration_templates/view.pt.
+
+* Change defaults for start and stop of projects & iterations. 
+
+    * Start and stop iteration on first day and last day of current month.
+    * Start and stop project on first day day of current month and last day of
       current month plus one year.
 
-0.7.0 - Sep 29, 2009
---------------------
+0.7.0 (09/29/2009)
+~~~~~~~~~~~~~~~~~~
 
-* Package and bug fixes [aclark]
-    - Package shipped without top level docs directory, fixed.
-    - projects_view was broken in several ways, fixed.
+* Package and bug fixes 
 
-0.6.0 - Sep 25, 2009
---------------------
+    * Package shipped without top level docs directory, fixed.
+    * projects_view was broken in several ways, fixed.
 
-* Rename package to 'collective.project'. [aclark]
-* Final Dexterity content types implementation: [aclark]
-    - Client
-        - Provides container for Project, and nothing else.
-    - Project
-        - Has start(datetime), stop(datetime), rate(float), flat(boolean), billable(boolean) fields.
-    - Iteration
-        - Has start(datetime), stop(datetime) fields.
-    - Task
-        - Has start(datetime), stop(datetime), billable(boolean) fields.
+0.6.0 (09/25/2009)
+~~~~~~~~~~~~~~~~~~
 
-* Provides custom view templates for Project, Iteration, and Task as well as three top level views: [aclark]
-    - projects_view
-        - Consulting -> Client A.
-    - clients_view
-        - Client A -> Consulting.
-    - print_view
-        - Format for print.
+* Rename package to 'collective.project'. 
+* Final Dexterity content types implementation: 
 
-0.5.0 - Aug 16, 2009
---------------------
+    * Client
 
-* Initial Dexterity content types implementation. [aclark]
+        * Provides container for Project, and nothing else.
 
-0.4.0 - Aug 14, 2009
---------------------
+    * Project
 
-* Track variable and flat rate fee projects (e.g. consulting and hosting). [aclark]
-    - Amortize flat rate fee over number of months.
+        * Has start(datetime), stop(datetime), rate(float), flat(boolean), billable(boolean) fields.
 
-* Compute totals for active projects only. [aclark]
+    * Iteration
 
-0.3.0 - Mar 19, 2009
---------------------
+        * Has start(datetime), stop(datetime) fields.
 
-* Bug fix in iteration_view template. [aclark]
+    * Task
 
-0.2.0 - Mar 19, 2009
---------------------
+        * Has start(datetime), stop(datetime), billable(boolean) fields.
+
+* Provides custom view templates for Project, Iteration, and Task as well as three top level views: 
+
+    * projects_view
+
+        * Consulting -> Client A.
+
+    * clients_view
+
+        * Client A -> Consulting.
+
+    * print_view
+
+        * Format for print.
+
+0.5.0 (08/16/2009)
+~~~~~~~~~~~~~~~~~~
+
+* Initial Dexterity content types implementation. 
+
+0.4.0 (08/14/2009)
+~~~~~~~~~~~~~~~~~~
+
+* Track variable and flat rate fee projects (e.g. consulting and hosting). 
+
+    * Amortize flat rate fee over number of months.
+
+* Compute totals for active projects only. 
+
+0.3.0 (03/19/2009)
+~~~~~~~~~~~~~~~~~~
+
+* Bug fix in iteration_view template. 
+
+0.2.0 (03/19/2009)
+~~~~~~~~~~~~~~~~~~
 
 * Add billable field to task
 * Add sort_on = 'getObjPositionInParent' to projects_view to display projects
-  in order. [aclark]
+  in order. 
 
-0.1.0 - Mar 15, 2009
---------------------
+0.1.0 (03/15/2009)
+~~~~~~~~~~~~~~~~~~
 
-* Initial release. [aclark]
-
+* Initial release. 
