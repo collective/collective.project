@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 import os
 
-version = open(os.path.join("collective", "project", "version.txt")).read().strip()
+version = '0.9.4'
 
 setup(name='collective.project',
       version=version,
-      description="""Formerly Products.project, this package aims for "simple" project management with 4 (Dexterity) content types added to Plone: Client, Project, Iteration, and Task.""",
+      description="""This package aims for "simple" project management with Dexterity content types: Client, Project, Iteration, and Task.""",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "INSTALL.txt")).read() +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
