@@ -5,7 +5,7 @@ version = '0.9.4'
 
 setup(name='collective.project',
       version=version,
-      description="""This package aims for "simple" project management with Dexterity content types: Client, Project, Iteration, and Task.""",
+      description="""Dexterity demo: this package aims for "simple" project management by adding four new Dexterity content types: Client, Project, Iteration, and Task.""",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "INSTALL.txt")).read() +
                        open(os.path.join("docs", "HISTORY.txt")).read(),

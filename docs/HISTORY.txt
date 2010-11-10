@@ -4,7 +4,8 @@ Changelog
 0.9.4 (11/10/2010)
 ~~~~~~~~~~~~~~~~~~
 
-* Clean up
+* Clean up package (no code changes)
+* Rebrand as "demo application"
 
 0.9.3 (12/05/2009)
 ~~~~~~~~~~~~~~~~~~
