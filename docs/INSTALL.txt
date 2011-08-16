@@ -1,8 +1,6 @@
 Installation
 ============
 
-To install collective.project using ``zc.buildout``, you can do this:
-
 * Add ``http://good-py.appspot.com/release/dexterity/1.0a2`` to the list of
   buildout extends, e.g.::
 
@@ -26,6 +24,6 @@ For more information about how to install Dexterity, please see:
 
 .. Note:: 
     You must extend the Dexterity KGS (known good set) provided by
-    http://good-py.appspot.com/release/dexterity/1.0b2 otherwise you will get
+    http://good-py.appspot.com/release/dexterity/1.0 otherwise you will get
     conflict errors in Buildout.
 

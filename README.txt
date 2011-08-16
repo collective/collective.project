@@ -5,11 +5,32 @@ Introduction
 
 This is a Dexterity demo application.
 
-It aims for "simple" project management in Plone by adding four new Dexterity content types: Client,
+It provides "simple" project management features by adding four Dexterity content types: Client,
 Project, Iteration, and Task. It also includes a tool to automate creation of iterations.
 Finally, there is a project workflow for client, project, and iteration that contains
-active/inactive state(s).
+active/inactive states.
 
-- Code repository: http://svn.plone.org/svn/collective/collective.project/trunk/
-- Questions and comments to aclark@aclark.net
-- Report bugs at aclark@aclark.net
+Installation
+============
+
+Extend the Dexterity KGS::
+
+    [buildout]
+    extends = http://good-py.appspot.com/release/dexterity/1.0
+    versions = versions
+
+Add ``collective.project`` to instance eggs::
+
+    [plone]
+    recipe = plone.recipe.zope2instance
+    eggs = collective.project
+
+For more information about installing Dexterity, please see:
+
+    http://plone.org/products/dexterity/documentation/how-to/install
+
+.. Note:: 
+    You must extend the Dexterity KGS (known good set) provided by
+    http://good-py.appspot.com/release/dexterity/1.0 otherwise you will get
+    conflict errors in Buildout.
+

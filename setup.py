@@ -1,16 +1,12 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.9.5'
-
 setup(
     name='collective.project',
-    version=version,
-    description="""Dexterity demo: this package aims for "simple" project management by adding four new Dexterity content types: Client, Project, Iteration, and Task.""",
+    version='0.9.5',
+    description="""Dexterity demo: "simple" project management via four Dexterity content types: Client, Project, Iteration, and Task.""",
     long_description=open("README.txt").read() + "\n" +
-                     open(os.path.join("docs", "INSTALL.txt")).read() +
                      open(os.path.join("docs", "HISTORY.txt")).read(),
-    # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
       "Framework :: Plone",
       "Programming Language :: Python",
@@ -28,7 +24,6 @@ setup(
     install_requires=[
         'setuptools',
         'plone.app.dexterity',
-        # -*- Extra requirements: -*-
     ],
     entry_points="""
     # -*- Entry points: -*-
