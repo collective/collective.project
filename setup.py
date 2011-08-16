@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.9.4'
+version = '0.9.5'
 
 setup(name='collective.project',
       version=version,
@@ -18,7 +18,7 @@ setup(name='collective.project',
       keywords='"project management"',
       author='Alex Clark',
       author_email='aclark@aclark.net',
-      url='https://svn.plone.org/svn/collective/collective.project/',
+      url='https://github.com/collective/collective.project',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective'],
