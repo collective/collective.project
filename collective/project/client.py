@@ -9,7 +9,7 @@ from collective.project import common
 
 class IClient(form.Schema):
 
-    title = schema.TextLine(
+    name = schema.TextLine(
             title=_(u"Name"),
             required=True,
         )
@@ -19,7 +19,7 @@ class IClient(form.Schema):
             required=False,
         )
 
-    address = schema.Text(
+    address = schema.TextLine(
             title=_(u"Address"),
             required=False,
         )
