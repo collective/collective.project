@@ -19,6 +19,11 @@ Extend the Dexterity KGS::
     extends = http://good-py.appspot.com/release/dexterity/1.0
     versions = versions
 
+.. Note:: 
+    You must extend the Dexterity KGS (known good set) provided by
+    http://good-py.appspot.com/release/dexterity/1.0 otherwise you will get
+    conflict errors in Buildout.
+
 Add ``collective.project`` to instance eggs::
 
     [plone]
@@ -26,11 +31,4 @@ Add ``collective.project`` to instance eggs::
     eggs = collective.project
 
 For more information about installing Dexterity, please see:
-
-    http://plone.org/products/dexterity/documentation/how-to/install
-
-.. Note:: 
-    You must extend the Dexterity KGS (known good set) provided by
-    http://good-py.appspot.com/release/dexterity/1.0 otherwise you will get
-    conflict errors in Buildout.
-
+http://plone.org/products/dexterity/documentation/how-to/install.
