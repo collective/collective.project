@@ -18,7 +18,7 @@ Installation
 Extend the Dexterity KGS::
 
     [buildout]
-    extends = http://good-py.appspot.com/release/dexterity/1.0
+    extends = http://good-py.appspot.com/release/dexterity/1.0.1
     versions = versions
 
 .. Note:: 
@@ -30,7 +30,9 @@ Add ``collective.project`` to instance eggs::
 
     [plone]
     recipe = plone.recipe.zope2instance
-    eggs = collective.project
+    eggs =
+        Plone
+        collective.project
 
 For more information about installing Dexterity, please see:
 http://plone.org/products/dexterity/documentation/how-to/install.
