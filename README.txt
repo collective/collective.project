@@ -10,6 +10,8 @@ Project, Iteration, and Task. It also includes a tool to automate creation of it
 Finally, there is a project workflow for client, project, and iteration that contains
 active/inactive states.
 
+.. image:: https://github.com/collective/collective.project/raw/master/screenshot.png
+
 Installation
 ============
 
