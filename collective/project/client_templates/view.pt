@@ -54,15 +54,6 @@
 
     <div tal:replace="structure provider:plone.belowcontentbody" />
 
-    <div class="align-right">
-        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
-            href="folder_contents">Manage contents</a></span></div>
-        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
-            href="content_status_history">Workflow</a></span></div>
-        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
-            href="edit">Edit</a></span></div>
-    </div>
-
 </div>
 
 </body>

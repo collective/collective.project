@@ -9,23 +9,23 @@ from collective.project import common
 
 class IClient(form.Schema):
 
-    name = schema.TextLine(
+    title = schema.TextLine(
             title=_(u"Name"),
             required=True,
         )
 
     email = schema.TextLine(
-            title=_(u"Email"),
-            required=False,
-        )
-
-    address = schema.TextLine(
-            title=_(u"Address"),
+            title=_(u"E-mail"),
             required=False,
         )
 
     website = schema.TextLine(
             title=_(u"Website"),
+            required=False,
+        )
+
+    address = schema.Text(
+            title=_(u"Address"),
             required=False,
         )
 
@@ -50,8 +50,7 @@ class View(common.View, grok.View):
         # XXX How do I order these fields The Right Way™?
         for field in IClient.namesAndDescriptions():
             if not (field[1].title == 'Name' or field[1].title == 'Notes'):
-                info.append('<p><b>%s</b>: %s</p>' % (
-                    field[1].title, getattr(self.context, field[0])))
+                info.append('<p><b>%s</b>: %s</p>' % (field[1].title, getattr(self.context, field[0])))
         info.reverse()
         info.append('<p><b>%s</b>: %s</p>' % (
             'Notes', self.context.description))

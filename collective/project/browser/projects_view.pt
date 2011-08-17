@@ -66,14 +66,6 @@
 
     </table>
 
-    <div class="float-right align-right">
-        Total: <span tal:content="python: view.projects_total(projects)" />
-        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
-            href="folder_contents">Manage contents</a></span></div>
-        <div class="managePortletsLink align-right"><span class="visualNoPrint"><a 
-            href="selectViewTemplate?templateId=clients_view">Toggle sort</a></span></div>
-    </div>
-
     <div tal:replace="structure provider:plone.belowcontentbody" />
 
 </div>
