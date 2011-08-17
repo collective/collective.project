@@ -12,7 +12,7 @@ setup(
       "Programming Language :: Python",
       "Topic :: Software Development :: Libraries :: Python Modules",
       ],
-    keywords='"project management"',
+    keywords='"dexterity plone python zope"',
     author='Alex Clark',
     author_email='aclark@aclark.net',
     url='https://github.com/collective/collective.project',
