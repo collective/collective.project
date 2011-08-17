@@ -8,7 +8,13 @@ Changelog
 * Do not hide Plone content editing border by default.
   [aclark]
 
-* Change default projects to: Development, Training, Hosting, Support.
+* Change default projects to:
+
+  * Development
+  * Training
+  * Hosting
+  * Support
+
   [aclark]
 
 * Clean up UI
