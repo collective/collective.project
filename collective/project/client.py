@@ -4,12 +4,8 @@ from five import grok
 from zope import schema
 from plone.directives import form
 from collective.project import projectMessageFactory as _
-import datetime
-import calendar
-from zope.schema.interfaces import IContextSourceBinder
-from zope.schema.vocabulary import SimpleVocabulary
-from Products.CMFCore.utils import getToolByName
 from collective.project import common
+
 
 class IClient(form.Schema):
 
@@ -21,22 +17,23 @@ class IClient(form.Schema):
     email = schema.TextLine(
             title=_(u"Email"),
             required=False,
-        ) 
+        )
 
     address = schema.Text(
             title=_(u"Address"),
             required=False,
-        ) 
+        )
 
     website = schema.TextLine(
             title=_(u"Website"),
             required=False,
-        ) 
+        )
 
     description = schema.Text(
             title=_(u"Notes"),
             required=False,
         )
+
 
 class View(common.View, grok.View):
     grok.context(IClient)
@@ -53,8 +50,9 @@ class View(common.View, grok.View):
         # XXX How do I order these fields The Right Way™?
         for field in IClient.namesAndDescriptions():
             if not (field[1].title == 'Name' or field[1].title == 'Notes'):
-                info.append('<p><b>%s</b>: %s</p>' % (field[1].title, getattr(self.context, field[0])))
+                info.append('<p><b>%s</b>: %s</p>' % (
+                    field[1].title, getattr(self.context, field[0])))
         info.reverse()
-        info.append('<p><b>%s</b>: %s</p>' % ('Notes', self.context.description))
+        info.append('<p><b>%s</b>: %s</p>' % (
+            'Notes', self.context.description))
         return info
-
