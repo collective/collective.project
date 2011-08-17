@@ -3,10 +3,12 @@
  <object name="project_properties" meta_type="Plone Property Sheet">
   <property name="title">collective.project Property Sheet</property>
   <property name="iteration" type="string">Active Projects</property>
-  <property name="disable_border" type="boolean">True</property>
+  <property name="disable_border" type="boolean">False</property>
   <property name="project_types" type="lines">
-   <element value="Consulting"/>
+   <element value="Development"/>
    <element value="Hosting"/>
+   <element value="Training"/>
+   <element value="Support"/>
   </property>
  </object>
 </object>
