@@ -2,10 +2,19 @@
 Changelog
 =========
 
-0.9.5 (08/16/2011)
+0.9.5 (08/17/2011)
 ------------------
 
-* More cleanup
+* Do not hide Plone content editing border by default.
+  [aclark]
+
+* Change default projects to: Development, Training, Hosting, Support.
+  [aclark]
+
+* Clean up UI
+  [aclark]
+
+* More package cleanup
   [aclark]
 
 0.9.4 (11/10/2010)
