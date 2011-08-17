@@ -5,7 +5,7 @@ setup(
     name='collective.project',
     version='0.9.6',
     description="""Dexterity demo: "simple" project management via four Dexterity content types: Client, Project, Iteration, and Task.""",
-    long_description=open("README.txt").read() + "\n" +
+    long_description=open("README.rst").read() + "\n" +
                      open(os.path.join("docs", "HISTORY.txt")).read(),
     classifiers=[
       "Framework :: Plone",
