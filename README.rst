@@ -36,3 +36,4 @@ Add ``collective.project`` to instance eggs::
 
 For more information about installing Dexterity, please see:
 http://plone.org/products/dexterity/documentation/how-to/install.
+

@@ -26,7 +26,7 @@ setup(
     license='ZPL',
     long_description=(
         open("README.rst").read() +
-        open(os.path.join("docs", "HISTORY.txt")).read(),
+        open(os.path.join("docs", "HISTORY.txt")).read()
     ),
     namespace_packages=[
         'collective'
