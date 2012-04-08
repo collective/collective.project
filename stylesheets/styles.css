@@ -93,6 +93,7 @@ th {
 
 img {
   max-width:100%;
+  border: 1px solid #CCCCCC;
 }
 
 header {
@@ -144,7 +145,7 @@ strong {
 }
 
 header ul li + li {
-  width:88px;
+  width:178px;
   border-left:1px solid #fff;
 }
 
