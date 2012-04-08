@@ -1,33 +1,39 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
 import os
 
+VERSION = '1.0.0'
+
+
 setup(
-    name='collective.project',
-    version='0.9.6',
-    description="""Dexterity demo: "simple" project management via four Dexterity content types: Client, Project, Iteration, and Task.""",
-    long_description=open("README.rst").read() + "\n" +
-                     open(os.path.join("docs", "HISTORY.txt")).read(),
+    author='Alex Clark',
+    author_email='aclark@aclark.net',
+    description='Demo app: project management with dexterity content types.',
+    entry_points={
+        'z3c.autoinclude.plugin': 'target = plone',
+    },
     classifiers=[
       "Framework :: Plone",
       "Programming Language :: Python",
       "Topic :: Software Development :: Libraries :: Python Modules",
       ],
-    keywords='"dexterity plone python zope"',
-    author='Alex Clark',
-    author_email='aclark@aclark.net',
-    url='https://github.com/collective/collective.project',
-    license='GPL',
-    packages=find_packages(exclude=['ez_setup']),
-    namespace_packages=['collective'],
     include_package_data=True,
-    zip_safe=False,
     install_requires=[
         'setuptools',
         'plone.app.dexterity',
     ],
-    entry_points="""
-    # -*- Entry points: -*-
-    [z3c.autoinclude.plugin]
-    target = plone
-    """,
+    keywords='add-on plone dexterity example package',
+    license='ZPL',
+    long_description=(
+        open("README.rst").read() +
+        open(os.path.join("docs", "HISTORY.txt")).read(),
+    ),
+    namespace_packages=[
+        'collective'
+    ],
+    packages=find_packages(),
+    url='http://collective.github.com/collective.project/',
+    name='collective.project',
+    version=VERSION,
+    zip_safe=False,
 )
