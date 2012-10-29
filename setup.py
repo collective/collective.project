@@ -2,7 +2,7 @@ from setuptools import find_packages
 from setuptools import setup
 import os
 
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 
 
 setup(
@@ -14,6 +14,10 @@ setup(
     },
     classifiers=[
       "Framework :: Plone",
+      "Framework :: Plone :: 4.0",
+      "Framework :: Plone :: 4.1",
+      "Framework :: Plone :: 4.2",
+      "Framework :: Plone :: 4.3",
       "Programming Language :: Python",
       "Topic :: Software Development :: Libraries :: Python Modules",
       ],

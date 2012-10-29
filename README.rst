@@ -8,18 +8,20 @@ This add-on demonstrates how to create a project management application in Plone
 Installation
 ============
 
-Extend the Dexterity KGS::
+**Plone < 4.3**
+
+For Plone versions earlier than 4.3, extend the Dexterity Known Good Set of packages e.g.::
 
     [buildout]
-    extends = http://good-py.appspot.com/release/dexterity/1.2
+    extends = http://good-py.appspot.com/release/dexterity/1.2.1
     versions = versions
 
 .. Note:: 
-    You must extend the Dexterity KGS (known good set) provided by
-    http://good-py.appspot.com/release/dexterity/1.2 otherwise you will get
-    conflict errors in Buildout.
+    You must extend the Dexterity Known Good Set provided by http://good-py.appspot.com/release/dexterity/1.2.1 to avoid Buildout conflict errors.
 
-Add ``collective.project`` to instance eggs::
+**Plone 4.x**
+
+Add ``collective.project`` to ``plone.recipe.zope2instance`` section ``eggs`` parameter e.g.::
 
     [plone]
     recipe = plone.recipe.zope2instance
@@ -27,7 +29,6 @@ Add ``collective.project`` to instance eggs::
         …
         collective.project
 
-For more information about installing Dexterity, please see:
+For more information about Dexterity, please see:
 
-- http://plone.org/products/dexterity/documentation/how-to/install
-
+- http://plone.org/products/dexterity/documentation
