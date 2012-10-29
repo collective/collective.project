@@ -17,7 +17,7 @@ setup(
             'grok',
             'relations',
         ],
-    }
+    },
     classifiers=[
       "Framework :: Plone",
       "Framework :: Plone :: 4.0",
