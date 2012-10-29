@@ -18,7 +18,7 @@
       name="default"
       title="collective.project"
       directory="profiles/default"
-      description="A 'simple' project content type that contains an 'hourly rate' field"
+      description="Dexterty demo: project management content types: client, project, iteration, task."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   
