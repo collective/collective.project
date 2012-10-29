@@ -12,11 +12,21 @@ setup(
     entry_points={
         'z3c.autoinclude.plugin': 'target = plone',
     },
-    extras_require={
-        'plone.app.dexterity': [
-            'grok',
-            'relations',
-        ],
+    extras_require = {
+        'test': [
+            'plone.app.testing',
+            'unittest2'
+            ],
+        'grok': [
+            'five.grok',
+            'plone.directives.dexterity',
+            'plone.directives.form >=1.1dev',
+            ],
+        'relations': [
+            'plone.app.relationfield',
+            'plone.app.intid',
+            'z3c.relationfield',
+            ]
     },
     classifiers=[
       "Framework :: Plone",
