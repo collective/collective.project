@@ -2,7 +2,7 @@ from zope import interface, schema
 from z3c.form import form, field, button
 from plone.app.z3cform.layout import wrap_form
 from collective.project import projectMessageFactory as _
-from bbb import getSite
+from collective.project.bbb import getSite
 from zope.schema import vocabulary
 from zope.interface import directlyProvides
 from zope.schema.interfaces import IVocabularyFactory
