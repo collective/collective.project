@@ -2,7 +2,7 @@ from setuptools import find_packages
 from setuptools import setup
 import os
 
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 
 
 setup(
@@ -11,22 +11,6 @@ setup(
     description='Demo app: project management with dexterity content types.',
     entry_points={
         'z3c.autoinclude.plugin': 'target = plone',
-    },
-    extras_require = {
-        'test': [
-            'plone.app.testing',
-            'unittest2'
-            ],
-        'grok': [
-            'five.grok',
-            'plone.directives.dexterity',
-            'plone.directives.form >=1.1dev',
-            ],
-        'relations': [
-            'plone.app.relationfield',
-            'plone.app.intid',
-            'z3c.relationfield',
-            ]
     },
     classifiers=[
       "Framework :: Plone",
@@ -40,7 +24,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'setuptools',
-        'plone.app.dexterity',
+        'plone.app.dexterity[grok]',
     ],
     keywords='add-on plone dexterity example package',
     license='ZPL',
