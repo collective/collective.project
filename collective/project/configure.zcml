@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
@@ -12,6 +13,13 @@
   <!-- Include our dependencies --> 
   <include package="plone.app.dexterity" />
   <include package="plone.directives.dexterity" />
+
+  <browser:page
+    for="collective.project.client.IClient"
+    name="edit"
+    class="collective.project.client.EditForm"
+    permission="cmf.ModifyPortalContent"
+    />
   
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile

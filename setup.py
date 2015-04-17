@@ -40,7 +40,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'setuptools',
-        'plone.app.dexterity',
+        'plone.app.dexterity [grok]',
     ],
     keywords='add-on plone dexterity example package',
     license='ZPL',

@@ -5,6 +5,8 @@ from zope import schema
 from plone.directives import form
 from collective.project import projectMessageFactory as _
 from collective.project import common
+from plone.dexterity.browser import edit
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class IClient(form.Schema):
@@ -55,3 +57,7 @@ class View(common.View, grok.View):
         info.append('<p><b>%s</b>: %s</p>' % (
             'Notes', self.context.description))
         return info
+
+
+class EditForm(edit.DefaultEditForm):
+    template = ViewPageTemplateFile('client_templates/edit.pt')
