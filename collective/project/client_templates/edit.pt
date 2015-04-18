@@ -9,7 +9,7 @@
             <tal:block replace="structure error/render" />
           </li>
         </ul>
-        <form action=".">
+        <form method="POST" action="@@edit">
           <div class="row" tal:repeat="widget view/widgets/values">
             <b tal:condition="widget/error"
                tal:content="structure widget/error/render"
