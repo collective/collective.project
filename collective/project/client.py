@@ -1,14 +1,14 @@
 # encoding: utf-8
 
 from zope import schema
-from plone.directives import form
 from collective.project import projectMessageFactory as _
 from collective.project import common
 from plone.dexterity.browser import edit
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.supermodel import model
 
 
-class IClient(form.Schema):
+class IClient(model.Schema):
 
     title = schema.TextLine(
             title=_(u"Name"),

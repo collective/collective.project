@@ -1,5 +1,4 @@
 from zope import schema
-from plone.directives import form
 from collective.project import projectMessageFactory as _
 from collective.project import common
 import datetime
@@ -15,7 +14,7 @@ def projectTypes(context):
         terms.append(SimpleVocabulary.createTerm(t, str(t), t))
     return SimpleVocabulary(terms)
 
-class IProject(form.Schema):
+class IProject(model.Schema):
 
     title = schema.Choice(
             title=_(u"Title"),
@@ -163,14 +162,12 @@ class View(common.View):
     def disable_border(self):
         return self.context.portal_properties.project_properties.disable_border
 
-@form.default_value(field=IProject['start'])
 def startDate(data):
     # start on first day of current month
     now = datetime.datetime.now()
     first_day = datetime.datetime(now.year, now.month, 1)
     return first_day
 
-@form.default_value(field=IProject['stop'])
 def stopDate(data):
     # stop in one year-ish.
     now = datetime.datetime.now()

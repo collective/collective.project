@@ -1,11 +1,10 @@
 from zope import schema
-from plone.directives import form
 from collective.project import projectMessageFactory as _
 from collective.project import common
 import datetime
 import calendar
 
-class IIteration(form.Schema):
+class IIteration(model.Schema):
     title = schema.TextLine(
             title=_(u"Title"),
         )

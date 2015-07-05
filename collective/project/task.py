@@ -1,14 +1,12 @@
 from zope import schema
-from plone.directives import form
 from collective.project import projectMessageFactory as _
 from collective.project import common
 import datetime
 from BTrees.Length import Length
 from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
+from plone.supermodel import model
 
-class ITask(form.Schema):
-    form.mode(id='hidden')
-    form.widget(summary=WysiwygFieldWidget)
+class ITask(model.Schema):
 
     id = schema.TextLine(
             title=_(u"Id"),
@@ -131,18 +129,15 @@ class View(common.View):
     def disable_border(self):
         return self.context.portal_properties.project_properties.disable_border
 
-@form.default_value(field=ITask['start'])
 def startDate(data):
     return datetime.datetime.today()
 
 
-@form.default_value(field=ITask['stop'])
 def stopDate(data):
     # stop in one hour
     return datetime.datetime.today() + datetime.timedelta(hours=1)
 
 
-@form.default_value(field=ITask['id'])
 def getNextCounter(self): # Some (slightly modified) Joel Burton Fu,
     # from SimpleCollector.
         """Get next ID. Lazily creates counter if neccessary.
