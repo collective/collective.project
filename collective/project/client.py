@@ -1,6 +1,5 @@
 # encoding: utf-8
 
-from five import grok
 from zope import schema
 from plone.directives import form
 from collective.project import projectMessageFactory as _
@@ -37,9 +36,7 @@ class IClient(form.Schema):
         )
 
 
-class View(common.View, grok.View):
-    grok.context(IClient)
-    grok.require('zope2.View')
+class View(common.View):
 
     def getStartDate(self, project):
         return self.format_date(project.start)

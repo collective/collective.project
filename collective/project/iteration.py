@@ -1,7 +1,7 @@
-from five import grok
 from zope import schema
 from plone.directives import form
 from collective.project import projectMessageFactory as _
+from collective.project import common
 import datetime
 import calendar
 
@@ -38,9 +38,7 @@ class IIteration(form.Schema):
             default=True,
         )
 
-class View(grok.View):
-    grok.context(IIteration)
-    grok.require('zope2.View')
+class View(common.View):
 
     def getIterTitle(self,project):
         client_breadcrumbs = self.client_breadcrumbs(project)

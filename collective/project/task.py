@@ -1,7 +1,7 @@
-from five import grok
 from zope import schema
 from plone.directives import form
 from collective.project import projectMessageFactory as _
+from collective.project import common
 import datetime
 from BTrees.Length import Length
 from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
@@ -41,9 +41,7 @@ class ITask(form.Schema):
         )
 
 
-class View(grok.View):
-    grok.context(ITask)
-    grok.require('zope2.View')
+class View(common.View):
 
     def getIterTitle(self, project):
         client_breadcrumbs = self.client_breadcrumbs(project)

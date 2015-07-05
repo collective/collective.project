@@ -1,14 +1,13 @@
-from five import grok
 from zope import schema
 from plone.directives import form
 from collective.project import projectMessageFactory as _
+from collective.project import common
 import datetime
 import calendar
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary
 from Products.CMFCore.utils import getToolByName
 
-@grok.provider(IContextSourceBinder)
 def projectTypes(context):
     terms = []
     pprop = getToolByName(context, 'portal_properties')
@@ -63,9 +62,7 @@ class IProject(form.Schema):
             default=True,
         )
 
-class View(grok.View):
-    grok.context(IProject)
-    grok.require('zope2.View')
+class View(common.View):
 
     def total_hours(self,iter,billable_only=False):
         if billable_only:
