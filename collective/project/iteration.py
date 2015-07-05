@@ -3,6 +3,8 @@ from collective.project import projectMessageFactory as _
 from collective.project import common
 import datetime
 import calendar
+from plone.supermodel import model
+
 
 class IIteration(model.Schema):
     title = schema.TextLine(
@@ -140,20 +142,17 @@ class View(common.View):
     def disable_border(self):
         return self.context.portal_properties.project_properties.disable_border
 
-@form.default_value(field=IIteration['start'])
 def startDate(data):
     # start on first day of current month
     now = datetime.datetime.now()
     first_day = datetime.datetime(now.year, now.month, 1)
     return first_day
 
-@form.default_value(field=IIteration['stop'])
 def stopDate(data):
     # stop in one month
     now = datetime.datetime.now()
     last_day = calendar.monthrange(now.year, now.month)[1]
     return datetime.datetime(now.year, now.month, last_day)
 
-@form.default_value(field=IIteration['title'])
 def iterTitle(data):
     return datetime.datetime.today().strftime('%B %Y')

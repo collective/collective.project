@@ -6,6 +6,8 @@ import calendar
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary
 from Products.CMFCore.utils import getToolByName
+from plone.supermodel import model
+
 
 def projectTypes(context):
     terms = []
@@ -14,13 +16,14 @@ def projectTypes(context):
         terms.append(SimpleVocabulary.createTerm(t, str(t), t))
     return SimpleVocabulary(terms)
 
+
 class IProject(model.Schema):
 
-    title = schema.Choice(
-            title=_(u"Title"),
-            source=projectTypes,
-            required=True,
-        )
+#    title = schema.Choice(
+#            title=_(u"Title"),
+#            source=projectTypes,
+#            required=True,
+#        )
 
     summary = schema.Text(
             title=_(u"Summary"),
