@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 from zope import schema
 from collective.project import projectMessageFactory as _
 from collective.project import common
@@ -49,7 +47,8 @@ class View(common.View):
         # XXX How do I order these fields The Right Way™?
         for field in IClient.namesAndDescriptions():
             if not (field[1].title == 'Name' or field[1].title == 'Notes'):
-                info.append('<p><b>%s</b>: %s</p>' % (field[1].title, getattr(self.context, field[0])))
+                info.append('<p><b>%s</b>: %s</p>' % (
+                    field[1].title, getattr(self.context, field[0])))
         info.reverse()
         info.append('<p><b>%s</b>: %s</p>' % (
             'Notes', self.context.description))

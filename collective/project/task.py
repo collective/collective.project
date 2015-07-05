@@ -3,8 +3,8 @@ from collective.project import projectMessageFactory as _
 from collective.project import common
 import datetime
 from BTrees.Length import Length
-from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
 from plone.supermodel import model
+
 
 class ITask(model.Schema):
 
@@ -59,12 +59,6 @@ class View(common.View):
         results.reverse()
         return ' &rarr; '.join(results)
 
-    def total_hours(self):
-        task = self.context
-        hours = datetime.timedelta(0)
-        hours = task.stop - task.start
-        return hours
-
     def format_float(self, f):
         try:
             f = '%.2f' % f
@@ -78,7 +72,7 @@ class View(common.View):
         project = iteration.aq_inner.aq_parent
         return project.rate
 
-    def total_hours(self,billable_only=False):
+    def total_hours(self, billable_only=False):
         if billable_only:
             task = self.context
             hours = datetime.timedelta(0)
@@ -129,6 +123,7 @@ class View(common.View):
     def disable_border(self):
         return self.context.portal_properties.project_properties.disable_border
 
+
 def startDate(data):
     return datetime.datetime.today()
 
@@ -138,7 +133,7 @@ def stopDate(data):
     return datetime.datetime.today() + datetime.timedelta(hours=1)
 
 
-def getNextCounter(self): # Some (slightly modified) Joel Burton Fu,
+def getNextCounter(self):  # Some (slightly modified) Joel Burton Fu,
     # from SimpleCollector.
         """Get next ID. Lazily creates counter if neccessary.
         """
