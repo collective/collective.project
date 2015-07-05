@@ -6,8 +6,6 @@
  <property name="description"
     i18n:translate="">A folder which can contain other items.</property>
  <property name="content_icon">folder_icon.gif</property>
- <property name="content_meta_type">ATFolder</property>
- <property name="product">ATContentTypes</property>
  <property name="factory">addATFolder</property>
  <property name="immediate_view">folder_listing</property>
  <property name="global_allow">True</property>

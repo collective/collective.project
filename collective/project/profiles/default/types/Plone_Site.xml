@@ -6,8 +6,6 @@
  <property name="description"
     i18n:translate="">The portal_type for the root object in a Plone system.</property>
  <property name="content_icon">site_icon.gif</property>
- <property name="content_meta_type">Plone Site</property>
- <property name="product">CMFPlone</property>
  <property name="factory">manage_addSite</property>
  <property name="immediate_view">folder_edit_form</property>
  <property name="global_allow">False</property>
