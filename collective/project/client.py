@@ -44,7 +44,7 @@ class View(common.View):
 
     def getInfo(self):
         info = []
-        # XXX How do I order these fields The Right Way™?
+        # Order fields
         for field in IClient.namesAndDescriptions():
             if not (field[1].title == 'Name' or field[1].title == 'Notes'):
                 info.append('<p><b>%s</b>: %s</p>' % (
