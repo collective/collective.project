@@ -44,7 +44,7 @@ class CreateIterationSchema(interface.Interface):
 
 class CreateIterationForm(form.Form):
     fields = field.Fields(CreateIterationSchema)
-    ignoreContext = True # don't use context to get widget data
+    ignoreContext = True  # Don't use context to get widget data
     label = _(u"Iteration tool")
     description = _(u"Create iteration for selected projects")
 
@@ -56,9 +56,10 @@ class CreateIterationForm(form.Form):
                 data_iter = data['iteration']
                 new_iter = data_iter.lower().replace(' ', '-')
             iter = iteration.getObject()
-            if not unicode(iter.id) == new_iter: # Don't deactive the current iter
+            if not unicode(iter.id) == new_iter:  # Don't deactive
+                                                    # current iter
                 if wftool.getInfoFor(iter, 'review_state') == 'active':
-                    wftool.doActionFor(iter,'deactivate')
+                    wftool.doActionFor(iter, 'deactivate')
 
     def create_iteration(self, action, data):
         if data['iteration']:
@@ -71,7 +72,8 @@ class CreateIterationForm(form.Form):
                 try:
                     proj.invokeFactory('iteration', new_iter)
                 except:
-                    print "Cannot create iteration %s for project %s." % (new_iter, proj.absolute_url())
+                    print "Cannot create iteration %s for project %s." % (
+                        new_iter, proj.absolute_url())
                 try:
                     iter_new = proj[new_iter]
                     iter_new.setTitle(data_iter)
@@ -79,7 +81,8 @@ class CreateIterationForm(form.Form):
                     iter_new.stop = stopDate()
                     iter_new.reindexObject()
                 except:
-                    print "Cannot create iteration %s for project %s." % (new_iter, proj.absolute_url())
+                    print "Cannot create iteration %s for project %s." % (
+                        new_iter, proj.absolute_url())
 
     @button.buttonAndHandler(u'Create')
     def handleApply(self, action):
@@ -90,26 +93,31 @@ class CreateIterationForm(form.Form):
             self.create_iteration(action, data)
             self.deactivate_iteration(action, data)
 
+
 def projectsDict(context):
     projects = {}
     for p in find_projects():
         obj = p.getObject()
-        bc = breadcrumbs(context,p)
+        bc = breadcrumbs(context, p)
         projects[bc] = obj
     return projects
+
 
 def projectsVocab(context):
     projects = projectsDict(context)
     items = sorted(projects.items())
     return vocabulary.SimpleVocabulary.fromItems(items)
 
+
 def find_iterations():
     site = getSite()
     return site.portal_catalog(portal_type='iteration')
 
+
 def find_projects():
     site = getSite()
     return site.portal_catalog(portal_type='project')
+
 
 def startDate():
     # start on first day of current month
@@ -117,11 +125,13 @@ def startDate():
     first_day = datetime.datetime(now.year, now.month, 1)
     return first_day
 
+
 def stopDate():
     # stop in one month
     now = datetime.datetime.now()
     last_day = calendar.monthrange(now.year, now.month)[1]
     return datetime.datetime(now.year, now.month, last_day)
+
 
 directlyProvides(projectsVocab, IVocabularyFactory)
 CreateIteration = wrap_form(CreateIterationForm)
