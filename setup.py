@@ -2,13 +2,13 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-VERSION = '2.0.0.dev0'
+VERSION = '2.0.0'
 
 
 setup(
     author='Alex Clark',
     author_email='aclark@aclark.net',
-    description='Project Management With Dexterity Content Types',
+    description='Project Management in Plone with Dexterity Content Types',
     entry_points={
         'z3c.autoinclude.plugin': 'target = plone',
     },
@@ -28,7 +28,7 @@ setup(
     keywords='dexterity plone project management',
     license='ZPL',
     long_description=(
-        open("README.rst").read() +
+        open("README.rst").read() + '\n' +
         open("CHANGES.rst").read()
     ),
     namespace_packages=[
