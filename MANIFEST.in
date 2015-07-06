@@ -1,3 +1,12 @@
-include *
-recursive-include collective *
-recursive-include docs *
+include *.GPL
+include *.png
+include *.py
+include *.rst
+include *.txt
+include Makefile
+include buildout.cfg
+include heroku.cfg
+recursive-include collective *.css
+recursive-include collective *.pt
+recursive-include collective *.xml
+recursive-include collective *.zcml
